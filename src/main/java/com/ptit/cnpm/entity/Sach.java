@@ -21,7 +21,7 @@ public class Sach {
     private int maSach;
     private int maVach;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "ma_dau_sach")
     private DauSach dauSach;
 

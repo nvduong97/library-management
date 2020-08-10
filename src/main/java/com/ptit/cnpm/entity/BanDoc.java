@@ -1,6 +1,8 @@
 package com.ptit.cnpm.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ptit.cnpm.model.CustomDateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +24,10 @@ public class BanDoc {
     private int maBanDoc;
     private int maVach;
     private String hoTen;
+
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date ngaySinh;
+
     private String diaChi;
     private String soDienThoai;
 
@@ -42,13 +47,13 @@ public class BanDoc {
 //        this.phieuMuons = phieuMuons;
 //    }
 
-    @JsonIgnore
-    public List<ChiTietMuon> getChiTietMuons() {
-        return chiTietMuons;
-    }
-
-    @JsonIgnore
-    public void setChiTietMuons(List<ChiTietMuon> chiTietMuons) {
-        this.chiTietMuons = chiTietMuons;
-    }
+//    @JsonIgnore
+//    public List<ChiTietMuon> getChiTietMuons() {
+//        return chiTietMuons;
+//    }
+//
+//    @JsonIgnore
+//    public void setChiTietMuons(List<ChiTietMuon> chiTietMuons) {
+//        this.chiTietMuons = chiTietMuons;
+//    }
 }

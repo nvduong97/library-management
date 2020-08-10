@@ -1,7 +1,9 @@
 package com.ptit.cnpm.controller;
 
-import com.ptit.cnpm.entity.BanDoc;
-import com.ptit.cnpm.service.BanDocService;
+import com.ptit.cnpm.entity.DauSach;
+import com.ptit.cnpm.entity.Sach;
+import com.ptit.cnpm.repository.SachRepository;
+import com.ptit.cnpm.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,23 +11,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 
-@RequestMapping("/muon-sach")
+@RequestMapping("")
 @Controller
-public class BanDocController {
+public class SachController {
     @Autowired
-    BanDocService banDocService;
+    TestService service;
 
-    @GetMapping("")
-    public ResponseEntity<?> getBanDocs() {
-        List<BanDoc> result = banDocService.getBanDocs();
+    @GetMapping("/sach")
+    public ResponseEntity<?> getSach() {
+        Sach result = service.getSach();
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @GetMapping("/1")
-    public ResponseEntity<?> getBanDoc() {
-        BanDoc result = banDocService.getBanDoc();
+    @GetMapping("/dausach")
+    public ResponseEntity<?> getDauSach() {
+        DauSach result = service.DauSach();
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

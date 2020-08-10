@@ -1,6 +1,8 @@
 package com.ptit.cnpm.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ptit.cnpm.model.CustomDateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +24,14 @@ public class ChiTietMuon {
     private int maSachMuon;
 
     private int trangThai;
+
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date ngayMuon;
+
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date ngayTra;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ma_sach")
     private Sach sach;
 
