@@ -47,13 +47,13 @@ public class BanDoc {
 //        this.phieuMuons = phieuMuons;
 //    }
 
-//    @JsonIgnore
-//    public List<ChiTietMuon> getChiTietMuons() {
-//        return chiTietMuons;
-//    }
-//
-//    @JsonIgnore
-//    public void setChiTietMuons(List<ChiTietMuon> chiTietMuons) {
-//        this.chiTietMuons = chiTietMuons;
-//    }
+    @JsonIgnore
+    public List<ChiTietMuon> getChiTietMuons() {
+        return chiTietMuons;
+    }
+
+    @JsonIgnore
+    public void setChiTietMuons(List<ChiTietMuon> chiTietMuons) {
+        this.chiTietMuons = chiTietMuons;
+    }
 }

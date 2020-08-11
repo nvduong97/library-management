@@ -1,4 +1,5 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
     <title>Mượn sách</title>
@@ -48,15 +49,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- left side start-->
     <div class="left-side sticky-left-side">
         <!--logo and iconic logo start-->
-        <div class="logo"><h1><a href="index.html">Quản Lý <span>Thư Viện</span></a></h1></div>
-        <div class="logo-icon text-center"><a href="index.html"><i class="lnr lnr-home"></i> </a></div>
+        <div class="logo"><h1><a th:href="@{/}">Quản Lý <span>Thư Viện</span></a></h1></div>
+        <div class="logo-icon text-center"><a th:href="@{/}"><i class="lnr lnr-home"></i> </a></div>
 
         <!--logo and iconic logo end-->
         <div class="left-side-inner">
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="menu-list"><a href="#"><i class="lnr lnr-book"></i> <span>Quản lý mượn sách</span></a></li>
+                <li><a th:href="@{/muon-sach}"><i class="lnr lnr-book"></i> <span>Quản lý mượn sách</span></a></li>
             </ul>
             <!--sidebar nav end-->
         </div>
@@ -127,21 +128,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="panel-body no-padding">
                         <div class="form-group">
                             <div class="col-sm-2">
-                                <input type="text" class="form-control1" id="name"
+                                <input type="text" class="form-control1" id="ban-doc"
                                        placeholder="Nhập thông tin độc giả...">
                             </div>
-                            <button type="button" class="btn btn-primary" style="margin-bottom: 20px">Xác nhận</button>
+                            <button type="button" class="btn btn-primary btn-tim-bd" style="margin-bottom: 20px">Xác nhận</button>
                         </div>
                         <div class="col-sm-12">
                             <div class="col-sm-6">
-                                <h4 class="blank1">Mã độc giả:</h4>
-                                <h4 class="blank1">Họ tên:</h4>
-                                <h4 class="blank1">Ngày sinh:</h4>
+                                <h4 class="blank1 maDocGia">Mã độc giả:</h4>
+                                <h4 class="blank1 hoTen">Họ tên:</h4>
+                                <h4 class="blank1 ngaySinh">Ngày sinh:</h4>
                             </div>
                             <div class="col-sm-6">
-                                <h4 class="blank1">Địa chỉ:</h4>
-                                <h4 class="blank1">Số điện thoại:</h4>
-                                <h4 class="blank1">Mã vạch:</h4>
+                                <h4 class="blank1 diaChi">Địa chỉ:</h4>
+                                <h4 class="blank1 sdt">Số điện thoại:</h4>
+                                <h4 class="blank1 maVach">Mã vạch:</h4>
                             </div>
                         </div>
                     </div>
@@ -299,5 +300,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".btn-tim-bd").on("click", function () {
+            var bandoc = $("#ban-doc").val().trim();
+            if (bandoc === '') {
+                $.notify("Không được để trống thông tin", "error");
+                return ;
+            }
+            $.ajax({
+                url: '/api/ban-doc/' + bandoc,
+                type: 'GET',
+                error: function (data) {
+                    $.notify("Dữ liệu yêu cầu không tồn tại", "error");
+                },
+                success: function (data) {
+                    $('.maDocGia').text("Mã độc giả: " + data.banDoc.maBanDoc);
+                    $('.hoTen').text("Họ tên: " + data.banDoc.hoTen);
+                    $('.ngaySinh').text("Ngày sinh: " + data.banDoc.ngaySinh);
+                    $('.diaChi').text("Địa chỉ: " + data.banDoc.diaChi);
+                    $('.sdt').text("Số điện thoại: " + data.banDoc.soDienThoai);
+                    $('.maVach').text("Mã vạch: " + data.banDoc.maVach);
+                }
+            });
+        });
+    });
+
+</script>
 </body>
 </html>
