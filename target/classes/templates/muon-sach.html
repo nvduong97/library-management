@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
-    <title>Mượn sách</title>
+    <title>Bạn Đọc</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Easy Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -41,7 +41,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- Meters graphs -->
     <script src="js/jquery-1.10.2.min.js"></script>
     <!-- Placed js at the end of the document so the pages load faster -->
+    <style>
+        .modal {
+            text-align: center;
+            padding: 0 !important;
+        }
 
+        .modal-sm {
+            width: 350px
+        }
+
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px;
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 
 <body class="sticky-header left-side-collapsed" onload="initMap()">
@@ -74,24 +97,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!--notification menu start -->
             <div class="menu-right">
                 <div class="user-panel-top">
-                    <div class="profile_details_left">
-                        <ul class="nofitications-dropdown">
-                            <!--                            <li ><h3 class="blank1">Basic Tables</h3></li>-->
-                            <li class="login_box" id="loginContainer">
-                                <div class="search-box">
-                                    <div id="sb-search" class="sb-search sb-search-open">
-                                        <form>
-                                            <input class="sb-search-input" placeholder="Nhập vào từ khóa..."
-                                                   type="search" id="search">
-                                            <input class="sb-search-submit" type="submit" value="">
-                                            <span class="sb-icon-search"> </span>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
                     <div class="profile_details">
                         <ul>
                             <li class="dropdown profile_details_drop">
@@ -127,170 +132,147 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                      data-widget-static="">
                     <div class="panel-body no-padding">
                         <div class="form-group">
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control1" id="ban-doc"
-                                       placeholder="Nhập thông tin độc giả...">
-                            </div>
-                            <button type="button" class="btn btn-primary btn-tim-bd" style="margin-bottom: 20px">Xác nhận</button>
+                            <div class="col-sm-2"><input type="text" class="form-control1 ban-doc"
+                                                         placeholder="Nhập mã vạch độc giả..."></div>
+                            <button type="button" class="btn btn-primary btn-tim-bd" style="margin-bottom: 20px">Xác
+                                nhận
+                            </button>
                         </div>
                         <div class="col-sm-12">
-                            <div class="col-sm-6">
-                                <h4 class="blank1 maDocGia">Mã độc giả:</h4>
-                                <h4 class="blank1 hoTen">Họ tên:</h4>
-                                <h4 class="blank1 ngaySinh">Ngày sinh:</h4>
-                            </div>
-                            <div class="col-sm-6">
-                                <h4 class="blank1 diaChi">Địa chỉ:</h4>
-                                <h4 class="blank1 sdt">Số điện thoại:</h4>
-                                <h4 class="blank1 maVach">Mã vạch:</h4>
+                            <div class="col-sm-12">
+                                <div class="col-sm-1">
+                                    <h4>Mã độc giả:</h4>
+                                    <h4>Họ tên:</h4>
+                                    <h4>Ngày sinh:</h4>
+                                </div>
+                                <div class="col-sm-5">
+                                    <h4 th:text="${banDoc.getMaBanDoc()}"></h4>
+                                    <h4 th:text="${banDoc.getHoTen()}"></h4>
+                                    <h4 th:text="${banDoc.getNgaySinh()}"></h4>
+                                </div>
+                                <div class="col-sm-1">
+                                    <h4>Địa chỉ:</h4>
+                                    <h4>Số điện thoại:</h4>
+                                    <h4>Mã vạch:</h4>
+                                </div>
+                                <div class="col-sm-5">
+                                    <h4 th:text="${banDoc.getDiaChi()}"></h4>
+                                    <h4 th:text="${banDoc.getSoDienThoai()}"></h4>
+                                    <h4 th:text="${banDoc.getMaVach()}"></h4>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="xs tabls">
-                    <div class="bs-example4" data-example-id="contextual-table">
-                        <div class="col-sm-6">
-                            <div class="col-sm-3">
-                                <h4 class="blank1">Sách mượn chưa trả</h4>
+                <th:block th:if="${banDoc!=null}">
+                    <div class="xs tabls">
+                        <div class="bs-example4" data-example-id="contextual-table">
+                            <div class="col-sm-6">
+                                <div class="col-sm-3">
+                                    <h4 class="blank1">Sách mượn chưa trả</h4>
+                                </div>
                             </div>
-                            <button type="button" class="btn btn-primary" style="margin-bottom: 20px">Thêm sách mượn</button>
+                            <table class="table">
+                                <thead>
+                                <tr class="danger">
+                                    <th>STT</th>
+                                    <th>Mã</th>
+                                    <th>Tên Sách</th>
+                                    <th>Tác Giả</th>
+                                    <th>Mã Vạch</th>
+                                    <th>Ngày Mượn</th>
+                                    <th>Ngày Trả</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="warning" th:each="sachMuon,state : ${sachMuons}">
+                                    <td scope="row" th:text="${state.count}"></td>
+                                    <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
+                                    <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
+                                        style="text-align: left"></td>
+                                    <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
+                                        style="text-align: left"></td>
+                                    <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
+                                    <td th:text="${#dates.format(sachMuon.getNgayMuon(), 'dd-MM-yyyy')}"
+                                        style="text-align: left"></td>
+                                    <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
+                                        style="text-align: left"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div style="text-align:center;margin:auto;">
+                                <button type="button" class="btn btn-primary btn-muon-sach" style="margin-bottom: 20px">
+                                    Mượn
+                                    sách
+                                </button>
+                                <button type="button" class="btn label-warning" style="margin-bottom: 20px">Xác nhận
+                                </button>
+                            </div>
                         </div>
-                        <table class="table">
-                            <thead>
-                            <tr class="danger">
-                                <th>STT</th>
-                                <th>Mã</th>
-                                <th>Tên Sách</th>
-                                <th>Tác Giả</th>
-                                <th>Mã Vạch</th>
-                                <th>Ngày Mượn</th>
-                                <th>Ngày Trả</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="warning">
-                                <th scope="row">1</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="warning">
-                                <th scope="row">2</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="warning">
-                                <th scope="row">3</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="warning">
-                                <th scope="row">4</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="warning">
-                                <th scope="row">5</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div style="text-align:center;margin:auto;">
-                            <button type="button" class="btn label-warning" style="margin-bottom: 20px">Xác nhận</button>
+                        <div class="bs-example4" data-example-id="contextual-table">
+                            <div class="col-sm-6">
+                                <h4 class="blank1">Sách mượn đã trả</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr class="danger">
+                                    <th>STT</th>
+                                    <th>Mã</th>
+                                    <th>Tên Sách</th>
+                                    <th>Tác Giả</th>
+                                    <th>Mã Vạch</th>
+                                    <th>Ngày Mượn</th>
+                                    <th>Ngày Trả</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="warning" th:each="sachMuon,state : ${sachDaMuons}">
+                                    <td scope="row" th:text="${state.count}"></td>
+                                    <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
+                                    <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
+                                        style="text-align: left"></td>
+                                    <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
+                                        style="text-align: left"></td>
+                                    <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
+                                    <td th:text="${#dates.format(sachMuon.getNgayMuon(), 'dd-MM-yyyy')}"
+                                        style="text-align: left"></td>
+                                    <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
+                                        style="text-align: left"></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="bs-example4" data-example-id="contextual-table">
-                        <div class="col-sm-6">
-                            <h4 class="blank1">Sách mượn đã trả</h4>
-                        </div>
-                        <table class="table">
-                            <thead>
-                            <tr class="danger">
-                                <th>STT</th>
-                                <th>Mã</th>
-                                <th>Tên Sách</th>
-                                <th>Tác Giả</th>
-                                <th>Mã Vạch</th>
-                                <th>Ngày Mượn</th>
-                                <th>Ngày Trả</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="success">
-                                <th scope="row">3</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="success">
-                                <th scope="row">3</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="success">
-                                <th scope="row">3</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="success">
-                                <th scope="row">3</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="success">
-                                <th scope="row">3</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                </th:block>
             </div>
         </div>
     </div>
     <!--body wrapper end-->
+
+    <!-- Modal Add Book -->
+    <div class="modal fade modal-nhap-sach" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalCenterTitle">Thêm sách mượn</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-pane active form-horizontal">
+                        <div class="form-group">
+                            <input type="text" class="form-control1" id="ma-sach" placeholder="Nhập mã sách...">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary btn-them-sach">Xác nhận</button>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Modal Add Book end-->
+
     <!--footer section start-->
     <footer><p>Copyright &copy; 2020. All rights reserved. Nguyễn Văn Dương</p></footer>
     <!--footer section end-->
@@ -302,12 +284,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
+        $(".btn-muon-sach").on("click", function () {
+            $("#ma-sach").val("");
+            $(".modal-nhap-sach").modal();
+        });
+
+        $(".btn-them-sach").on("click", function () {
+            var maSach = $("#ma-sach").val().trim();
+            $.notify(maSach + "Sách đã được thêm", "success");
+            $(".modal-nhap-sach").modal("hide");
+        });
+
         $(".btn-tim-bd").on("click", function () {
-            var bandoc = $("#ban-doc").val().trim();
+            var bandoc = $(".ban-doc").val().trim();
             if (bandoc === '') {
                 $.notify("Không được để trống thông tin", "error");
-                return ;
+                return;
             }
             $.ajax({
                 url: '/api/ban-doc/' + bandoc,
@@ -316,15 +309,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $.notify("Dữ liệu yêu cầu không tồn tại", "error");
                 },
                 success: function (data) {
-                    $('.maDocGia').text("Mã độc giả: " + data.banDoc.maBanDoc);
-                    $('.hoTen').text("Họ tên: " + data.banDoc.hoTen);
-                    $('.ngaySinh').text("Ngày sinh: " + data.banDoc.ngaySinh);
-                    $('.diaChi').text("Địa chỉ: " + data.banDoc.diaChi);
-                    $('.sdt').text("Số điện thoại: " + data.banDoc.soDienThoai);
-                    $('.maVach').text("Mã vạch: " + data.banDoc.maVach);
+                    if (!data) {
+                        $.notify("Dữ liệu yêu cầu không tồn tại", "error");
+                    } else {
+                        window.location.replace("/muon-sach?ban-doc=" + bandoc);
+                    }
                 }
             });
         });
+
+        // $(".btn-tim-bd").on("click", function () {
+        //     var bandoc = $("#ban-doc").val().trim();
+        //     if (bandoc === '') {
+        //         $.notify("Không được để trống thông tin", "error");
+        //         return ;
+        //     }
+        //     $.ajax({
+        //         url: '/api/muon-sach/' + bandoc,
+        //         type: 'GET',
+        //         error: function (data) {
+        //             $.notify("Dữ liệu yêu cầu không tồn tại", "error");
+        //         },
+        //         success: function (data) {
+        //             $('.maDocGia').text("Mã độc giả: " + data.banDoc.maBanDoc);
+        //             $('.hoTen').text("Họ tên: " + data.banDoc.hoTen);
+        //             $('.ngaySinh').text("Ngày sinh: " + data.banDoc.ngaySinh);
+        //             $('.diaChi').text("Địa chỉ: " + data.banDoc.diaChi);
+        //             $('.sdt').text("Số điện thoại: " + data.banDoc.soDienThoai);
+        //             $('.maVach').text("Mã vạch: " + data.banDoc.maVach);
+        //         }
+        //     });
+        // });
     });
 
 </script>

@@ -38,14 +38,14 @@ public class ChiTietMuonService {
         return chiTietMuonRepository.save(chiTietMuon);
     }
 
-    public List<ChiTietMuon> getSachDangMuon(){
-        List<ChiTietMuon> chiTietMuons = chiTietMuonRepository.findAllByTrangThai(0).get();
-        return chiTietMuons;
-    }
-
-    public List<ChiTietMuon> getSachDaTra(){
-        return chiTietMuonRepository.findAllByTrangThai(1).get();
-    }
+//    public List<ChiTietMuon> getSachDangMuon(){
+//        List<ChiTietMuon> chiTietMuons = chiTietMuonRepository.findAllByTrangThai(0).get();
+//        return chiTietMuons;
+//    }
+//
+//    public List<ChiTietMuon> getSachDaTra(){
+//        return chiTietMuonRepository.findAllByTrangThai(1).get();
+//    }
 
     public ChiTietMuon getSachMuon() {
         return chiTietMuonRepository.findById(1).get();

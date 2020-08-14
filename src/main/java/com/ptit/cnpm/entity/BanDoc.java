@@ -31,7 +31,7 @@ public class BanDoc {
     private String diaChi;
     private String soDienThoai;
 
-    @OneToMany(mappedBy = "banDoc", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "banDoc", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ChiTietMuon> chiTietMuons;
 
 //    @OneToMany(mappedBy = "banDoc", fetch = FetchType.LAZY)

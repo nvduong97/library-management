@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
-    <title>Bạn Đọc</title>
+    <title>Mượn sách</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Easy Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -135,14 +135,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <div class="col-sm-12">
                             <div class="col-sm-6">
-                                <h4 th:text= "${'Mã độc giả: ' + banDoc.getMaBanDoc()}"></h4>
-                                <h4 th:text= "${'Họ tên: ' + banDoc.getHoTen()}"></h4>
-                                <h4 th:text= "${'Ngày sinh: ' + banDoc.getNgaySinh()}"></h4>
+                                <h4 class="blank1 maDocGia">Mã độc giả:</h4>
+                                <h4 class="blank1 hoTen">Họ tên:</h4>
+                                <h4 class="blank1 ngaySinh">Ngày sinh:</h4>
                             </div>
                             <div class="col-sm-6">
-                                <h4 th:text= "${'Địa chỉ: ' + banDoc.getDiaChi()}"></h4>
-                                <h4 th:text= "${'Số điện thoại: ' + banDoc.getSoDienThoai()}"></h4>
-                                <h4 th:text= "${'Mã vạch: ' + banDoc.getMaVach()}"></h4>
+                                <h4 class="blank1 diaChi">Địa chỉ:</h4>
+                                <h4 class="blank1 sdt">Số điện thoại:</h4>
+                                <h4 class="blank1 maVach">Mã vạch:</h4>
                             </div>
                         </div>
                     </div>
@@ -169,14 +169,50 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="warning" th:each="sachMuon,state : ${sachMuons}">
-                                <td scope="row" th:text="${state.count}"></td>
-                                <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getNgayMuon()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getNgayTra()}" style="text-align: left"></td>
+                            <tr class="warning">
+                                <th scope="row">1</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr class="warning">
+                                <th scope="row">2</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr class="warning">
+                                <th scope="row">3</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr class="warning">
+                                <th scope="row">4</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr class="warning">
+                                <th scope="row">5</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
                             </tr>
                             </tbody>
                         </table>
@@ -201,14 +237,50 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="success" th:each="sachMuon,state : ${sachDaMuons}">
-                                <td scope="row" th:text="${state.count}"></td>
-                                <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getNgayMuon()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getNgayTra()}" style="text-align: left"></td>
+                            <tr class="success">
+                                <th scope="row">3</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr class="success">
+                                <th scope="row">3</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr class="success">
+                                <th scope="row">3</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr class="success">
+                                <th scope="row">3</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                            </tr>
+                            <tr class="success">
+                                <th scope="row">3</th>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
+                                <td>Column content</td>
                             </tr>
                             </tbody>
                         </table>
@@ -229,32 +301,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-<!--<script type="text/javascript">-->
-<!--    $(document).ready(function() {-->
-<!--        $(".btn-tim-bd").on("click", function () {-->
-<!--            var bandoc = $("#ban-doc").val().trim();-->
-<!--            if (bandoc === '') {-->
-<!--                $.notify("Không được để trống thông tin", "error");-->
-<!--                return ;-->
-<!--            }-->
-<!--            $.ajax({-->
-<!--                url: '/api/muon-sach/' + bandoc,-->
-<!--                type: 'GET',-->
-<!--                error: function (data) {-->
-<!--                    $.notify("Dữ liệu yêu cầu không tồn tại", "error");-->
-<!--                },-->
-<!--                success: function (data) {-->
-<!--                    $('.maDocGia').text("Mã độc giả: " + data.banDoc.maBanDoc);-->
-<!--                    $('.hoTen').text("Họ tên: " + data.banDoc.hoTen);-->
-<!--                    $('.ngaySinh').text("Ngày sinh: " + data.banDoc.ngaySinh);-->
-<!--                    $('.diaChi').text("Địa chỉ: " + data.banDoc.diaChi);-->
-<!--                    $('.sdt').text("Số điện thoại: " + data.banDoc.soDienThoai);-->
-<!--                    $('.maVach').text("Mã vạch: " + data.banDoc.maVach);-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".btn-tim-bd").on("click", function () {
+            var bandoc = $("#ban-doc").val().trim();
+            if (bandoc === '') {
+                $.notify("Không được để trống thông tin", "error");
+                return ;
+            }
+            $.ajax({
+                url: '/api/ban-doc/' + bandoc,
+                type: 'GET',
+                error: function (data) {
+                    $.notify("Dữ liệu yêu cầu không tồn tại", "error");
+                },
+                success: function (data) {
+                    $('.maDocGia').text("Mã độc giả: " + data.banDoc.maBanDoc);
+                    $('.hoTen').text("Họ tên: " + data.banDoc.hoTen);
+                    $('.ngaySinh').text("Ngày sinh: " + data.banDoc.ngaySinh);
+                    $('.diaChi').text("Địa chỉ: " + data.banDoc.diaChi);
+                    $('.sdt').text("Số điện thoại: " + data.banDoc.soDienThoai);
+                    $('.maVach').text("Mã vạch: " + data.banDoc.maVach);
+                }
+            });
+        });
+    });
 
-<!--</script>-->
+</script>
 </body>
 </html>
