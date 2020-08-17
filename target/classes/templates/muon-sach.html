@@ -139,6 +139,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="col-sm-2" th:unless="${banDoc.getMaBanDoc()==0}">
                                 <script th:inline="javascript">
                                     var banDoc = [[${banDoc}]];
+                                    var sachMuons = [[${sachMuons}]];
                                 </script>
                                 <input type="text" class="form-control1 ban-doc"
                                        th:placeholder="${banDoc.getMaBanDoc()}">
@@ -186,18 +187,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <table class="table">
                             <thead>
                             <tr class="danger">
-                                <th>STT</th>
                                 <th>Mã</th>
                                 <th>Tên Sách</th>
                                 <th>Tác Giả</th>
                                 <th>Mã Vạch</th>
                                 <th>Ngày Mượn</th>
                                 <th>Ngày Trả</th>
+                                <th>Hành Động</th>
                             </tr>
                             </thead>
                             <tbody class="list-book">
-                            <tr class="warning" th:each="sachMuon,state : ${sachMuons}" th:data-id="${sachMuon.getMaSachMuon()}">
-                                <td scope="row" th:text="${state.count}"></td>
+                            <tr class="warning" th:each="sachMuon : ${sachMuons}" th:data-id="${sachMuon.maSachMuon}">
+                                <!--                                <td scope="row" th:text="${state.count}"></td>-->
                                 <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
                                 <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
                                     style="text-align: left"></td>
@@ -208,6 +209,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     style="text-align: left"></td>
                                 <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
                                     style="text-align: left"></td>
+                                <td style="width: 150px">
+                                    <button type="button" class="btn btn-danger" disabled>Xóa</button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -329,14 +333,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 success: function (data) {
                     if (!data) {
                         $.notify("Dữ liệu yêu cầu không tồn tại", "error");
-                    } else {
+                    }else {
+                        checkBook(data.maVach);
                         var sach = {
                             maSach: data.maSach,
                             dauSach: data.dauSach,
                             banDoc: banDoc
                         };
                         listData.push(sach);
-                        console.log(listData);
                         insertNewBook(data);
                         $.notify("Sách đã được thêm", "success");
                     }
@@ -369,49 +373,56 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         function insertNewBook(sach) {
             $('.list-book').append(`
-			     <tr data-id="${sach.maSach}">
-					<td>${sach.maSach}</td>
+			     <tr class="warning" data-id="${sach.maSach}">
 					<td>${sach.maSach}</td>
 					<td>${sach.dauSach.tenDauSach}</td>
 					<td>${sach.dauSach.tacGia}</td>
 					<td>${sach.maVach}</td>
 					<td></td>
 					<td></td>
-					<td>
-						<button onclick="deleteBook(${sach.maSach})">Xóa</button>
+					<td style="width: 150px">
+						<button type="button" class="btn btn-danger" onclick="deleteBook(${sach.maSach})">Xóa</button>
 					</td>
 				</tr>
 			`)
         };
-
-        function deleteBook(id) {
-            $(".list-book tr[data-id='" + id + "']").remove()
-        };
-
-        // $(".btn-tim-bd").on("click", function () {
-        //     var bandoc = $("#ban-doc").val().trim();
-        //     if (bandoc === '') {
-        //         $.notify("Không được để trống thông tin", "error");
-        //         return ;
-        //     }
-        //     $.ajax({
-        //         url: '/api/muon-sach/' + bandoc,
-        //         type: 'GET',
-        //         error: function (data) {
-        //             $.notify("Dữ liệu yêu cầu không tồn tại", "error");
-        //         },
-        //         success: function (data) {
-        //             $('.maDocGia').text("Mã độc giả: " + data.banDoc.maBanDoc);
-        //             $('.hoTen').text("Họ tên: " + data.banDoc.hoTen);
-        //             $('.ngaySinh').text("Ngày sinh: " + data.banDoc.ngaySinh);
-        //             $('.diaChi').text("Địa chỉ: " + data.banDoc.diaChi);
-        //             $('.sdt').text("Số điện thoại: " + data.banDoc.soDienThoai);
-        //             $('.maVach').text("Mã vạch: " + data.banDoc.maVach);
-        //         }
-        //     });
-        // });
     });
 
+    function deleteBook(id) {
+        $(".list-book tr[data-id='" + id + "']").remove();
+    };
+
+    function checkBook(id) {
+        console.log("agdgg");
+        sachMuons.forEach(value => {
+            if (value.sach.maVach === id) {
+                console.log("helllo" + id);
+            }
+        });
+    };
+
+    // $(".btn-tim-bd").on("click", function () {
+    //     var bandoc = $("#ban-doc").val().trim();
+    //     if (bandoc === '') {
+    //         $.notify("Không được để trống thông tin", "error");
+    //         return ;
+    //     }
+    //     $.ajax({
+    //         url: '/api/muon-sach/' + bandoc,
+    //         type: 'GET',
+    //         error: function (data) {
+    //             $.notify("Dữ liệu yêu cầu không tồn tại", "error");
+    //         },
+    //         success: function (data) {
+    //             $('.maDocGia').text("Mã độc giả: " + data.banDoc.maBanDoc);
+    //             $('.hoTen').text("Họ tên: " + data.banDoc.hoTen);
+    //             $('.ngaySinh').text("Ngày sinh: " + data.banDoc.ngaySinh);
+    //             $('.diaChi').text("Địa chỉ: " + data.banDoc.diaChi);
+    //             $('.sdt').text("Số điện thoại: " + data.banDoc.soDienThoai);
+    //             $('.maVach').text("Mã vạch: " + data.banDoc.maVach);
+    //         }
+    //     });
+    // });
 </script>
 </body>
 </html>
