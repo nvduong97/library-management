@@ -132,118 +132,145 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                      data-widget-static="">
                     <div class="panel-body no-padding">
                         <div class="form-group">
-                            <div class="col-sm-2"><input type="text" class="form-control1 ban-doc"
-                                                         placeholder="Nhập mã vạch độc giả..."></div>
+                            <div class="col-sm-2" th:if="${banDoc.getMaBanDoc()==0}">
+                                <input type="text" class="form-control1 ban-doc"
+                                       placeholder="Nhập mã vạch độc giả...">
+                            </div>
+                            <div class="col-sm-2" th:unless="${banDoc.getMaBanDoc()==0}">
+                                <script th:inline="javascript">
+                                    var banDoc = [[${banDoc}]];
+                                </script>
+                                <input type="text" class="form-control1 ban-doc"
+                                       th:placeholder="${banDoc.getMaBanDoc()}">
+                            </div>
                             <button type="button" class="btn btn-primary btn-tim-bd" style="margin-bottom: 20px">Xác
                                 nhận
                             </button>
                         </div>
                         <div class="col-sm-12">
-                            <div class="col-sm-12">
-                                <div class="col-sm-1">
-                                    <h4>Mã độc giả:</h4>
-                                    <h4>Họ tên:</h4>
-                                    <h4>Ngày sinh:</h4>
-                                </div>
-                                <div class="col-sm-5">
+                            <div class="col-sm-1">
+                                <h4>Mã độc giả:</h4>
+                                <h4>Họ tên:</h4>
+                                <h4>Ngày sinh:</h4>
+                            </div>
+                            <div class="col-sm-5">
+                                <th:block th:if="${banDoc.getMaBanDoc()!=0}">
                                     <h4 th:text="${banDoc.getMaBanDoc()}"></h4>
                                     <h4 th:text="${banDoc.getHoTen()}"></h4>
                                     <h4 th:text="${banDoc.getNgaySinh()}"></h4>
-                                </div>
-                                <div class="col-sm-1">
-                                    <h4>Địa chỉ:</h4>
-                                    <h4>Số điện thoại:</h4>
-                                    <h4>Mã vạch:</h4>
-                                </div>
-                                <div class="col-sm-5">
+                                </th:block>
+                            </div>
+                            <div class="col-sm-1">
+                                <h4>Địa chỉ:</h4>
+                                <h4>Số điện thoại:</h4>
+                                <h4>Mã vạch:</h4>
+                            </div>
+                            <div class="col-sm-5">
+                                <th:block th:if="${banDoc.getMaBanDoc()!=0}">
                                     <h4 th:text="${banDoc.getDiaChi()}"></h4>
                                     <h4 th:text="${banDoc.getSoDienThoai()}"></h4>
                                     <h4 th:text="${banDoc.getMaVach()}"></h4>
-                                </div>
+                                </th:block>
                             </div>
                         </div>
                     </div>
                 </div>
-<!--                <th:block th:if="${banDoc.getHoTen()!=null}">-->
-                    <div class="xs tabls">
-                        <div class="bs-example4" data-example-id="contextual-table">
-                            <div class="col-sm-6">
-                                <div class="col-sm-3">
-                                    <h4 class="blank1">Sách mượn chưa trả</h4>
-                                </div>
+                <!--                <th:block th:if="${banDoc.getHoTen()!=null}">-->
+                <div class="xs tabls">
+                    <div class="bs-example4" data-example-id="contextual-table">
+                        <div class="col-sm-6">
+                            <div class="col-sm-3">
+                                <h4 class="blank1">Sách mượn chưa trả</h4>
                             </div>
-                            <table class="table">
-                                <thead>
-                                <tr class="danger">
-                                    <th>STT</th>
-                                    <th>Mã</th>
-                                    <th>Tên Sách</th>
-                                    <th>Tác Giả</th>
-                                    <th>Mã Vạch</th>
-                                    <th>Ngày Mượn</th>
-                                    <th>Ngày Trả</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="warning" th:each="sachMuon,state : ${sachMuons}">
-                                    <td scope="row" th:text="${state.count}"></td>
-                                    <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
-                                    <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
-                                        style="text-align: left"></td>
-                                    <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
-                                        style="text-align: left"></td>
-                                    <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
-                                    <td th:text="${#dates.format(sachMuon.getNgayMuon(), 'dd-MM-yyyy')}"
-                                        style="text-align: left"></td>
-                                    <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
-                                        style="text-align: left"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div style="text-align:center;margin:auto;">
-                                <button type="button" class="btn btn-primary btn-muon-sach" style="margin-bottom: 20px">
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr class="danger">
+                                <th>Mã</th>
+                                <th>Tên Sách</th>
+                                <th>Tác Giả</th>
+                                <th>Mã Vạch</th>
+                                <th>Ngày Mượn</th>
+                                <th>Ngày Trả</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody class="list-book">
+                            <tr class="warning" th:each="sachMuon : ${sachMuons}" th:data-id="${sachMuon.maSachMuon}">
+                                <!--                                <td scope="row" th:text="${state.count}"></td>-->
+                                <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
+                                    style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
+                                    style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
+                                <td th:text="${#dates.format(sachMuon.getNgayMuon(), 'dd-MM-yyyy')}"
+                                    style="text-align: left"></td>
+                                <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
+                                    style="text-align: left"></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div style="text-align:center;margin:auto;">
+                            <th:block th:if="${banDoc.getMaBanDoc()==0}">
+                                <button type="button" class="btn btn-primary" style="margin-bottom: 20px" disabled>
                                     Mượn
                                     sách
                                 </button>
-                                <button type="button" class="btn label-warning" style="margin-bottom: 20px"}>Xác nhận
+                                <button type="button" class="btn label-warning" style="margin-bottom: 20px" } disabled>
+                                    Xác
+                                    nhận
                                 </button>
-                            </div>
-                        </div>
-                        <div class="bs-example4" data-example-id="contextual-table">
-                            <div class="col-sm-6">
-                                <h4 class="blank1">Sách mượn đã trả</h4>
-                            </div>
-                            <table class="table">
-                                <thead>
-                                <tr class="danger">
-                                    <th>STT</th>
-                                    <th>Mã</th>
-                                    <th>Tên Sách</th>
-                                    <th>Tác Giả</th>
-                                    <th>Mã Vạch</th>
-                                    <th>Ngày Mượn</th>
-                                    <th>Ngày Trả</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="warning" th:each="sachMuon,state : ${sachDaMuons}">
-                                    <td scope="row" th:text="${state.count}"></td>
-                                    <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
-                                    <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
-                                        style="text-align: left"></td>
-                                    <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
-                                        style="text-align: left"></td>
-                                    <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
-                                    <td th:text="${#dates.format(sachMuon.getNgayMuon(), 'dd-MM-yyyy')}"
-                                        style="text-align: left"></td>
-                                    <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
-                                        style="text-align: left"></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            </th:block>
+                            <th:block th:unless="${banDoc.getMaBanDoc()==0}">
+                                <button type="button" class="btn btn-primary" id="btn-muon-sach"
+                                        style="margin-bottom: 20px">
+                                    Mượn
+                                    sách
+                                </button>
+                                <button type="button" class="btn label-warning" id="btn-xac-nhan"
+                                        style="margin-bottom: 20px" } disabled>Xác
+                                    nhận
+                                </button>
+                            </th:block>
                         </div>
                     </div>
-<!--                </th:block>-->
+                    <div class="bs-example4" data-example-id="contextual-table">
+                        <div class="col-sm-6">
+                            <h4 class="blank1">Sách mượn đã trả</h4>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr class="danger">
+                                <th>STT</th>
+                                <th>Mã</th>
+                                <th>Tên Sách</th>
+                                <th>Tác Giả</th>
+                                <th>Mã Vạch</th>
+                                <th>Ngày Mượn</th>
+                                <th>Ngày Trả</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="warning" th:each="sachMuon,state : ${sachDaMuons}">
+                                <td scope="row" th:text="${state.count}"></td>
+                                <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
+                                    style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
+                                    style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
+                                <td th:text="${#dates.format(sachMuon.getNgayMuon(), 'dd-MM-yyyy')}"
+                                    style="text-align: left"></td>
+                                <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
+                                    style="text-align: left"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--                </th:block>-->
             </div>
         </div>
     </div>
@@ -285,14 +312,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".btn-muon-sach").on("click", function () {
+        var listData = [];
+
+        $("#btn-muon-sach").on("click", function () {
             $("#ma-sach").val("");
             $(".modal-nhap-sach").modal();
         });
 
         $(".btn-them-sach").on("click", function () {
             var maSach = $("#ma-sach").val().trim();
-            $.notify(maSach + "Sách đã được thêm", "success");
+            $.ajax({
+                url: '/api/sach/' + maSach,
+                type: 'GET',
+                error: function (data) {
+                    $.notify("Dữ liệu yêu cầu không tồn tại", "error");
+                },
+                success: function (data) {
+                    if (!data) {
+                        $.notify("Dữ liệu yêu cầu không tồn tại", "error");
+                    } else {
+                        var sach = {
+                            maSach: data.maSach,
+                            dauSach: data.dauSach,
+                            banDoc: banDoc
+                        };
+                        listData.push(sach);
+                        console.log(listData);
+                        insertNewBook(data);
+                        $.notify("Sách đã được thêm", "success");
+                    }
+                }
+            });
             $(".modal-nhap-sach").modal("hide");
         });
 
@@ -317,6 +367,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 }
             });
         });
+
+        function insertNewBook(sach) {
+            $('.list-book').append(`
+			     <tr data-id="${sach.maSach}">
+					<td>${sach.maSach}</td>
+					<td>${sach.dauSach.tenDauSach}</td>
+					<td>${sach.dauSach.tacGia}</td>
+					<td>${sach.maVach}</td>
+					<td></td>
+					<td></td>
+					<td>
+						<button onclick="deleteBook(${sach.maSach})">Xóa</button>
+					</td>
+				</tr>
+			`)
+        };
+
+        function deleteBook(id) {
+            $(".list-book tr[data-id='" + id + "']").remove()
+            return false;
+        };
+
 
         // $(".btn-tim-bd").on("click", function () {
         //     var bandoc = $("#ban-doc").val().trim();

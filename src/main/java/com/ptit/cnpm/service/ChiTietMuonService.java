@@ -50,4 +50,8 @@ public class ChiTietMuonService {
     public ChiTietMuon getSachMuon() {
         return chiTietMuonRepository.findById(1).get();
     }
+
+    public ChiTietMuon getOne() {
+        return chiTietMuonRepository.findById(1).get();
+    }
 }
