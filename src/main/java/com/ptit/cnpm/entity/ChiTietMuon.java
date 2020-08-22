@@ -35,9 +35,9 @@ public class ChiTietMuon {
     @JoinColumn(name = "ma_sach")
     private Sach sach;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "ma_phieu_muon")
-//    private PhieuMuon phieuMuon;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ma_phieu_muon")
+    private PhieuMuon phieuMuon;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "ma_ban_doc")

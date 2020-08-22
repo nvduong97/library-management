@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BanDocService {
@@ -20,16 +21,19 @@ public class BanDocService {
     @Autowired
     ChiTietMuonRepository chiTietMuonRepository;
 
-    public BanDoc getBanDoc(int key) {
-        return banDocRepository.findByMaBanDocOrMaVach(key, key).orElse(new BanDoc());
-//        BanDoc banDoc = banDocRepository.findByMaBanDocOrMaVach(key, key).orElse(null);
-//        List<ChiTietMuon> sachDaMuons = chiTietMuonRepository.findAllByTrangThai(1).orElse(new ArrayList<>());
-//        List<ChiTietMuon> sachDangMuons = chiTietMuonRepository.findAllByTrangThai(0).orElse(new ArrayList<>());
-//        return BanDocDTO.builder()
-//                .banDoc(banDoc)
-//                .sanhDaMuons(sachDaMuons)
-//                .sanhDangMuons(sachDangMuons)
-//                .build();
+    public BanDocDTO getBanDoc(int id) {
+        Optional<BanDoc> banDoc = banDocRepository.findById(id);
+        if(!banDoc.isPresent()){
+            return new BanDocDTO();
+        }
+        List<ChiTietMuon> sachDaMuons = chiTietMuonRepository.findByIdAndBanDoc(1, id).orElse(new ArrayList<>());
+        List<ChiTietMuon> sachDangMuons = chiTietMuonRepository.findByIdAndBanDoc(0, id).orElse(new ArrayList<>());
+        System.out.printf("");
+        return BanDocDTO.builder()
+                .banDoc(banDoc.get())
+                .sanhDaMuons(sachDaMuons)
+                .sanhDangMuons(sachDangMuons)
+                .build();
     }
 
     public BanDoc getBanDocById(int id) {

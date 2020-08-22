@@ -9,12 +9,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-//@Setter
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Entity
-//@Table(name = "phieu_muon")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "phieu_muon")
 public class PhieuMuon {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

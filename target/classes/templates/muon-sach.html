@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
 <head>
-    <title>Bạn Đọc</title>
+    <title>Mượn sách</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Easy Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -132,14 +131,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                      data-widget-static="">
                     <div class="panel-body no-padding">
                         <div class="form-group">
-                            <div class="col-sm-2" th:if="${banDoc.getMaBanDoc()==0}">
+                            <div class="col-sm-2" th:if="${banDoc==null}">
                                 <input type="text" class="form-control1 ban-doc"
                                        placeholder="Nhập mã vạch độc giả...">
                             </div>
-                            <div class="col-sm-2" th:unless="${banDoc.getMaBanDoc()==0}">
+                            <div class="col-sm-2" th:unless="${banDoc==null}">
                                 <script th:inline="javascript">
                                     var banDoc = [[${banDoc}]];
                                     var sachMuons = [[${sachMuons}]];
+                                    console.log(sachMuons);
                                 </script>
                                 <input type="text" class="form-control1 ban-doc"
                                        th:placeholder="${banDoc.getMaBanDoc()}">
@@ -149,25 +149,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </button>
                         </div>
                         <div class="col-sm-12">
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                                 <h4>Mã độc giả:</h4>
                                 <h4>Họ tên:</h4>
                                 <h4>Ngày sinh:</h4>
                             </div>
-                            <div class="col-sm-5">
-                                <th:block th:if="${banDoc.getMaBanDoc()!=0}">
+                            <div class="col-sm-4">
+                                <th:block th:if="${banDoc!=null}">
                                     <h4 th:text="${banDoc.getMaBanDoc()}"></h4>
                                     <h4 th:text="${banDoc.getHoTen()}"></h4>
-                                    <h4 th:text="${banDoc.getNgaySinh()}"></h4>
+                                    <h4 th:text="${#dates.format(banDoc.getNgaySinh(), 'dd-MM-yyyy')}"></h4>
                                 </th:block>
                             </div>
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                                 <h4>Địa chỉ:</h4>
                                 <h4>Số điện thoại:</h4>
                                 <h4>Mã vạch:</h4>
                             </div>
-                            <div class="col-sm-5">
-                                <th:block th:if="${banDoc.getMaBanDoc()!=0}">
+                            <div class="col-sm-4">
+                                <th:block th:if="${banDoc!=null}">
                                     <h4 th:text="${banDoc.getDiaChi()}"></h4>
                                     <h4 th:text="${banDoc.getSoDienThoai()}"></h4>
                                     <h4 th:text="${banDoc.getMaVach()}"></h4>
@@ -180,9 +180,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="xs tabls">
                     <div class="bs-example4" data-example-id="contextual-table">
                         <div class="col-sm-6">
-                            <div class="col-sm-3">
-                                <h4 class="blank1">Sách mượn chưa trả</h4>
-                            </div>
+                            <h4 class="blank1">Sách mượn chưa trả</h4>
                         </div>
                         <table class="table">
                             <thead>
@@ -216,7 +214,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </tbody>
                         </table>
                         <div style="text-align:center;margin:auto;">
-                            <th:block th:if="${banDoc.getMaBanDoc()==0}">
+                            <th:block th:if="${banDoc==null}">
                                 <button type="button" class="btn btn-primary" style="margin-bottom: 20px" disabled>
                                     Mượn
                                     sách
@@ -226,7 +224,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     nhận
                                 </button>
                             </th:block>
-                            <th:block th:unless="${banDoc.getMaBanDoc()==0}">
+                            <th:block th:unless="${banDoc==null}">
                                 <button type="button" class="btn btn-primary" id="btn-muon-sach"
                                         style="margin-bottom: 20px">
                                     Mượn
@@ -333,8 +331,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 success: function (data) {
                     if (!data) {
                         $.notify("Dữ liệu yêu cầu không tồn tại", "error");
-                    }else {
-                        checkBook(data.maVach);
+                    } else {
+                        if (!checkBook(data.dauSach.maDauSach)) {
+                            console.log(false);
+                        }else {
+                            console.log(true);
+                        }
+
                         var sach = {
                             maSach: data.maSach,
                             dauSach: data.dauSach,
@@ -392,11 +395,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $(".list-book tr[data-id='" + id + "']").remove();
     };
 
-    function checkBook(id) {
-        console.log("agdgg");
-        sachMuons.forEach(value => {
-            if (value.sach.maVach === id) {
-                console.log("helllo" + id);
+    function checkBook(key) {
+        console.log("vào hàm");
+        sachMuons.forEach(function (value) {
+            if (value.sach.dauSach.maDauSach === key) {
+                console.log("helllo   " + key);
+                return false;
             }
         });
     };
