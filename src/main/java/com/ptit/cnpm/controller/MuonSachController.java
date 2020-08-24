@@ -20,14 +20,13 @@ public class MuonSachController {
     BanDocService banDocService;
 
     @GetMapping("/")
-    public String homePage(){
+    public String homePage() {
         return "index";
     }
 
     @GetMapping("/muon-sach")
-    public String getBanDoc(Model model, @RequestParam(defaultValue = "0", name = "ban-doc", required = false) Integer id ) {
+    public String getBanDoc(Model model, @RequestParam(defaultValue = "0", name = "ban-doc", required = false) Integer id) {
         BanDocDTO result = banDocService.getBanDoc(id);
-        System.out.printf("");
         model.addAttribute("banDoc", result.getBanDoc());
         model.addAttribute("sachMuons", result.getSanhDangMuons());
         model.addAttribute("sachDaMuons", result.getSanhDaMuons());
@@ -35,7 +34,7 @@ public class MuonSachController {
     }
 
     @GetMapping("/api/ban-doc/{id}")
-    public ResponseEntity<Object> getBanDocById(@PathVariable int id ) {
+    public ResponseEntity<Object> getBanDocById(@PathVariable int id) {
         return ResponseEntity.ok(banDocService.getBanDocById(id));
     }
 }

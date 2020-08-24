@@ -25,12 +25,6 @@ public class ChiTietMuonController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-//    @GetMapping("/sachDaMuons")
-//    public ResponseEntity<?> getSachDaMuons() {
-//        List<ChiTietMuon> result = chiTietMuonService.getSachDaTra();
-//        return ResponseEntity.status(HttpStatus.OK).body(result);
-//    }
-//
     @GetMapping("/get-one")
     public ResponseEntity<?> getByID() {
         return ResponseEntity.ok().body(chiTietMuonService.getOne());
