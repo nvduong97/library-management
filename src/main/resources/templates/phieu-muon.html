@@ -111,10 +111,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <h3>Thông tin phiếu mượn</h3>
                             </div>
                             <div class="col-sm-12">
-                                <h4 class="blank1">Mã độc giả:</h4>
-                                <h4 class="blank1">Họ tên:</h4>
-                                <h4 class="blank1">Mã vạch độc giả:</h4>
-                                <h4 class="blank1">Mã vạch phiếu mượn:</h4>
+                                <div class="col-sm-3">
+                                    <h4 class="blank1">Mã độc giả:</h4>
+                                    <h4 class="blank1">Họ tên:</h4>
+                                    <h4 class="blank1">Mã vạch độc giả:</h4>
+                                    <h4 class="blank1">Mã vạch phiếu mượn:</h4>
+                                </div>
+                                <div class="col-sm-9">
+                                    <h4 class="blank1" th:text="${phieuMuon.getBanDoc().getMaBanDoc()}"></h4>
+                                    <h4 class="blank1" th:text="${phieuMuon.getBanDoc().getHoTen()}"></h4>
+                                    <h4 class="blank1" th:text="${phieuMuon.getBanDoc().getMaVach()}"></h4>
+                                    <h4 class="blank1" th:text="${phieuMuon.getMaVach()}"></h4>
+                                </div>
                             </div>
                         </div>
                         <br/>
@@ -134,59 +142,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="warning">
-                                <th scope="row">1</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="warning">
-                                <th scope="row">2</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="warning">
-                                <th scope="row">3</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="warning">
-                                <th scope="row">4</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="warning">
-                                <th scope="row">5</th>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
+                            <tr class="warning" th:each="sachMuon,state : ${phieuMuon.getChiTietMuons()}">
+                                <td scope="row" th:text="${state.count}"></td>
+                                <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
+                                    style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
+                                    style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
+                                <td th:text="${#dates.format(sachMuon.getNgayMuon(), 'dd-MM-yyyy')}"
+                                    style="text-align: left"></td>
+                                <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
+                                    style="text-align: left"></td>
                             </tr>
                             </tbody>
                         </table>
                         <div style="text-align:center;margin:auto;">
-                            <h4 class="blank1">Tổng số sách đang mượn: 5</h4>
+                            <h4 class="blank1" th:text="${'Tổng số sách đang mượn: ' + phieuMuon.getChiTietMuons().size()}"></h4>
                         </div>
                         <br/>
                         <div style="text-align:center;margin:auto;">
-                            <button type="button" class="btn label-warning" style="margin-bottom: 20px">In phiếu mượn
+                            <button type="button" class="btn label-warning btn-in-phieu-muon" style="margin-bottom: 20px">In phiếu mượn
                             </button>
                         </div>
                     </div>
@@ -205,5 +181,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".btn-in-phieu-muon").on("click", function () {
+            swal({
+                title: 'In phiếu mượn thành công' + '<br />'+ 'quay về trang chủ',
+                showCancelButton: true
+            }).then(function (result) {
+                if (result.value) {
+                    window.location.replace("/");
+                }
+            })
+        });
+    });
+</script>
 </body>
 </html>

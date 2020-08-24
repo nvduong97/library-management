@@ -31,7 +31,7 @@ public class ChiTietMuon {
     @JsonSerialize(using = CustomDateSerializer.class)
     private Date ngayTra;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ma_sach")
     private Sach sach;
 
@@ -39,13 +39,23 @@ public class ChiTietMuon {
     @JoinColumn(name = "ma_phieu_muon")
     private PhieuMuon phieuMuon;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_ban_doc")
     private BanDoc banDoc;
 
     @JsonIgnore
     public BanDoc getBanDoc() {
         return banDoc;
+    }
+
+    @JsonIgnore
+    public PhieuMuon getPhieuMuon() {
+        return phieuMuon;
+    }
+
+    @JsonIgnore
+    public void setPhieuMuon(PhieuMuon phieuMuon) {
+        this.phieuMuon = phieuMuon;
     }
 
     @JsonIgnore

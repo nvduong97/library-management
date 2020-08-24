@@ -313,12 +313,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
 <script type="text/javascript">
     var set = new Set();
-    var date;
+    var listData = [];
+    var startDate;
     var endDate;
     $(document).ready(function () {
-        var listData = [];
         if (sachMuons != null) {
-            sachMuons.forEach(value => set.add(value.sach.dauSach.maDauSach));
+            sachMuons.forEach(myFunction);
+        }
+
+        function myFunction(value) {
+            set.add(value.sach.dauSach.maDauSach);
+            value.ngayMuon = value.ngayMuon.slice(0, 10);
+            value.ngayTra = value.ngayTra.slice(0, 10);
+            value.sach.dauSach.namXuatBan = value.sach.dauSach.namXuatBan.slice(0, 10);
+            listData.push(value);
         }
 
         $("#btn-muon-sach").on("click", function () {
@@ -332,6 +340,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         $(".btn-them-sach").on("click", function () {
             var maSach = $("#ma-sach").val().trim();
+            if (maSach === '') {
+                $("#ma-sach").notify(
+                    "Không được để trống thông tin",
+                    {position: "right"}
+                );
+                return;
+            }
+
             $.ajax({
                 url: '/api/sach/' + maSach,
                 type: 'GET',
@@ -343,13 +359,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         $.notify("Dữ liệu yêu cầu không tồn tại", "error");
                     } else {
                         if (!isBookDup(data.dauSach.maDauSach)) {
-                            var sm = {
-                                trangThai: 0,
-                                sach: data,
-                                banDoc: banDoc
-                            };
-                            listData.push(sm);
                             insertNewBook(data);
+                            data.dauSach.namXuatBan = data.dauSach.namXuatBan.slice(0, 10);
+                            var ctm = {
+                                maSachMuon: 0,
+                                trangThai: 0,
+                                ngayMuon: startDate,
+                                ngayTra: endDate,
+                                sach: data
+                            };
+                            listData.push(ctm);
                             $.notify("Sách đã được thêm", "success");
                         } else {
                             $.notify("Sách này đang được mượn", "warn");
@@ -392,12 +411,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
         function insertNewBook(sach) {
-            date = new Date();
-            endDate = new Date();
-            endDate.setDate(endDate.getDate() + 30);
+            var date = new Date();
+            var date1 = new Date();
+            date1.setDate(date1.getDate() + 30);
             const dateTimeFormat = new Intl.DateTimeFormat('en', {year: 'numeric', month: '2-digit', day: '2-digit'});
-            var [{value: month}, , {value: day}, , {value: year}] = dateTimeFormat.formatToParts(date);
-            var [{value: month1}, , {value: day1}, , {value: year1}] = dateTimeFormat.formatToParts(endDate);
+            [{value: month}, , {value: day}, , {value: year}] = dateTimeFormat.formatToParts(date);
+            startDate = year + '-' + month + '-' + day;
+            [{value: month1}, , {value: day1}, , {value: year1}] = dateTimeFormat.formatToParts(date1);
+            endDate = year1 + '-' + month1 + '-' + day1;
             if (set.size > sachMuons.length) {
                 document.getElementById("btn-xac-nhan").disabled = false;
             }
@@ -423,7 +444,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             showCancelButton: true
         }).then(function (result) {
             if (result.value) {
-                window.location.replace("/phieu-muon");
+                req = {
+                    banDoc: banDoc,
+                    chiTietMuons: listData
+                }
+                console.log(req)
+                var myJSON = JSON.stringify(req);
+                console.log(myJSON)
+
+                $.ajax({
+                    url: 'http://localhost:8081/api/luu/phieu-muon',
+                    type: 'POST',
+                    data: myJSON,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    error: function (data) {
+                        alert(" Lỗi " + data.responseJSON.message)
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        alert("Tạo mới thành công")
+                    }
+                });
+
+                // window.location.replace("/phieu-muon");
             }
         })
     });

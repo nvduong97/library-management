@@ -1,6 +1,8 @@
 package com.ptit.cnpm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ptit.cnpm.model.CustomDateSerializer;
 import lombok.AllArgsConstructor;
@@ -25,27 +27,29 @@ public class BanDoc {
     private int maVach;
     private String hoTen;
 
-    @JsonSerialize(using = CustomDateSerializer.class)
+//    @JsonSerialize(using = CustomDateSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd")
     private Date ngaySinh;
 
     private String diaChi;
     private String soDienThoai;
 
-    @OneToMany(mappedBy = "banDoc", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonIgnoreProperties(value = {"banDoc"}, allowSetters = true)
+    @OneToMany(mappedBy = "banDoc", fetch = FetchType.LAZY)
     private List<ChiTietMuon> chiTietMuons;
 
-//    @OneToMany(mappedBy = "banDoc", fetch = FetchType.LAZY)
-//    private List<PhieuMuon> phieuMuons;
+    @OneToMany(mappedBy = "banDoc", fetch = FetchType.LAZY)
+    private List<PhieuMuon> phieuMuons;
 
-//    @JsonIgnore
-//    public List<PhieuMuon> getPhieuMuons() {
-//        return phieuMuons;
-//    }
-//
-//    @JsonIgnore
-//    public void setPhieuMuons(List<PhieuMuon> phieuMuons) {
-//        this.phieuMuons = phieuMuons;
-//    }
+    @JsonIgnore
+    public List<PhieuMuon> getPhieuMuons() {
+        return phieuMuons;
+    }
+
+    @JsonIgnore
+    public void setPhieuMuons(List<PhieuMuon> phieuMuons) {
+        this.phieuMuons = phieuMuons;
+    }
 
     @JsonIgnore
     public List<ChiTietMuon> getChiTietMuons() {

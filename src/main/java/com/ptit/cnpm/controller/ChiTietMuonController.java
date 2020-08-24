@@ -30,9 +30,9 @@ public class ChiTietMuonController {
         return ResponseEntity.ok().body(chiTietMuonService.getOne());
     }
 
-    @PostMapping("/themDangMuon")
-    public ResponseEntity<?> themSachMuon(@RequestBody ChiTietMuonReq req) {
-        ChiTietMuon result = chiTietMuonService.themSachMuon(req);
-        return ResponseEntity.status(HttpStatus.OK).body(result);
-    }
+//    @PostMapping("/themDangMuon")
+//    public ResponseEntity<?> themSachMuon(@RequestBody ChiTietMuonReq req) {
+//        ChiTietMuon result = chiTietMuonService.themSachMuon(req);
+//        return ResponseEntity.status(HttpStatus.OK).body(result);
+//    }
 }

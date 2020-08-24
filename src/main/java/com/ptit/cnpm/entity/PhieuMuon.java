@@ -21,11 +21,11 @@ public class PhieuMuon {
     private int maPhieuMuon;
     private int maVach;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ma_ban_doc")
     private BanDoc banDoc;
 
-    @OneToMany(mappedBy = "phieuMuon", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "phieuMuon")
     private List<ChiTietMuon> chiTietMuons;
 
 //    @JsonIgnore

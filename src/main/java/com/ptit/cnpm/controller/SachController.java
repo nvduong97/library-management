@@ -32,7 +32,6 @@ public class SachController {
 
     @GetMapping("/api/sach/{id}")
     public ResponseEntity<?> getSachById(@PathVariable int id) {
-        Sach sach = sachService.getSachById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(sach);
+        return ResponseEntity.ok(sachService.getSachById(id));
     }
 }

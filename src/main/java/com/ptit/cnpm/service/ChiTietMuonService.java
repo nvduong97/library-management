@@ -25,26 +25,17 @@ public class ChiTietMuonService {
     @Autowired
     SachRepository sachRepository;
 
-    public ChiTietMuon themSachMuon(ChiTietMuonReq req){
-        ChiTietMuon chiTietMuon = new ChiTietMuon();
-        Sach sach = sachRepository.findById(req.getMaSach()).get();
-        BanDoc banDoc = banDocRepository.findById(req.getMaBanDoc()).get();
-
-        chiTietMuon.setTrangThai(0);
-        chiTietMuon.setBanDoc(banDoc);
-        chiTietMuon.setNgayMuon(new Date());
-        chiTietMuon.setNgayTra(new Date());
-        chiTietMuon.setSach(sach);
-        return chiTietMuonRepository.save(chiTietMuon);
-    }
-
-//    public List<ChiTietMuon> getSachDangMuon(){
-//        List<ChiTietMuon> chiTietMuons = chiTietMuonRepository.findAllByTrangThai(0).get();
-//        return chiTietMuons;
-//    }
+//    public ChiTietMuon themSachMuon(ChiTietMuonReq req){
+//        ChiTietMuon chiTietMuon = new ChiTietMuon();
+//        Sach sach = sachRepository.findById(req.getMaSach()).get();
+//        BanDoc banDoc = banDocRepository.findById(req.getMaBanDoc()).get();
 //
-//    public List<ChiTietMuon> getSachDaTra(){
-//        return chiTietMuonRepository.findAllByTrangThai(1).get();
+//        chiTietMuon.setTrangThai(0);
+//        chiTietMuon.setBanDoc(banDoc);
+//        chiTietMuon.setNgayMuon(new Date());
+//        chiTietMuon.setNgayTra(new Date());
+//        chiTietMuon.setSach(sach);
+//        return chiTietMuonRepository.save(chiTietMuon);
 //    }
 
     public ChiTietMuon getSachMuon() {
