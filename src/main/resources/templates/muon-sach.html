@@ -462,12 +462,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         alert(" Lỗi " + data.responseJSON.message)
                     },
                     success: function (data) {
-                        console.log(data);
-                        alert("Tạo mới thành công")
+                        window.location.replace("/phieu-muon?id="+data.maPhieuMuon);
                     }
                 });
-
-                // window.location.replace("/phieu-muon");
             }
         })
     });
