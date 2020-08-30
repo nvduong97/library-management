@@ -196,7 +196,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <tbody class="list-book">
                             <tr class="warning" th:each="sachMuon, state : ${sachMuons}"
                                 th:data-id="${sachMuon.getSach().getDauSach().getMaDauSach()}">
-                                <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getMaSach()}" style="text-align: left"></td>
                                 <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
                                     style="text-align: left"></td>
                                 <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
@@ -255,7 +255,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <tbody>
                             <tr class="warning" th:each="sachMuon,state : ${sachDaMuons}">
                                 <!--                                <td scope="row" th:text="${state.count}"></td>-->
-                                <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getMaSach()}" style="text-align: left"></td>
                                 <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
                                     style="text-align: left"></td>
                                 <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
@@ -462,12 +462,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         alert(" Lỗi " + data.responseJSON.message)
                     },
                     success: function (data) {
-                        console.log(data);
-                        alert("Tạo mới thành công")
+                        window.location.replace("/phieu-muon?id="+data.maPhieuMuon);
                     }
                 });
-
-                // window.location.replace("/phieu-muon");
             }
         })
     });

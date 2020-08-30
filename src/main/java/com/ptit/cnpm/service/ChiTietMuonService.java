@@ -1,29 +1,14 @@
 package com.ptit.cnpm.service;
 
-import com.ptit.cnpm.entity.BanDoc;
-import com.ptit.cnpm.entity.ChiTietMuon;
-import com.ptit.cnpm.entity.Sach;
-import com.ptit.cnpm.model.ChiTietMuonReq;
-import com.ptit.cnpm.repository.BanDocRepository;
 import com.ptit.cnpm.repository.ChiTietMuonRepository;
-import com.ptit.cnpm.repository.SachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class ChiTietMuonService {
 
     @Autowired
     ChiTietMuonRepository chiTietMuonRepository;
-
-    @Autowired
-    BanDocRepository banDocRepository;
-
-    @Autowired
-    SachRepository sachRepository;
 
 //    public ChiTietMuon themSachMuon(ChiTietMuonReq req){
 //        ChiTietMuon chiTietMuon = new ChiTietMuon();
@@ -37,12 +22,4 @@ public class ChiTietMuonService {
 //        chiTietMuon.setSach(sach);
 //        return chiTietMuonRepository.save(chiTietMuon);
 //    }
-
-    public ChiTietMuon getSachMuon() {
-        return chiTietMuonRepository.findById(1).get();
-    }
-
-    public ChiTietMuon getOne() {
-        return chiTietMuonRepository.findById(1).get();
-    }
 }

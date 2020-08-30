@@ -144,7 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <tbody>
                             <tr class="warning" th:each="sachMuon,state : ${phieuMuon.getChiTietMuons()}">
                                 <td scope="row" th:text="${state.count}"></td>
-                                <td th:text="${sachMuon.getMaSachMuon()}" style="text-align: left"></td>
+                                <td th:text="${sachMuon.getSach().getMaSach()}" style="text-align: left"></td>
                                 <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
                                     style="text-align: left"></td>
                                 <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"

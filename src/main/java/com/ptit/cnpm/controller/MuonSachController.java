@@ -1,6 +1,5 @@
 package com.ptit.cnpm.controller;
 
-import com.ptit.cnpm.entity.BanDoc;
 import com.ptit.cnpm.model.BanDocDTO;
 import com.ptit.cnpm.service.BanDocService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +30,5 @@ public class MuonSachController {
         model.addAttribute("sachMuons", result.getSanhDangMuons());
         model.addAttribute("sachDaMuons", result.getSanhDaMuons());
         return "muon-sach";
-    }
-
-    @GetMapping("/api/ban-doc/{id}")
-    public ResponseEntity<Object> getBanDocById(@PathVariable int id) {
-        return ResponseEntity.ok(banDocService.getBanDocById(id));
     }
 }

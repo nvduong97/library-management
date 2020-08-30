@@ -1,8 +1,7 @@
 package com.ptit.cnpm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ptit.cnpm.model.CustomDateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,10 +24,10 @@ public class ChiTietMuon {
 
     private int trangThai;
 
-    @JsonSerialize(using = CustomDateSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd")
     private Date ngayMuon;
 
-    @JsonSerialize(using = CustomDateSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd")
     private Date ngayTra;
 
     @ManyToOne()
