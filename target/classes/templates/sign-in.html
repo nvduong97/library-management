@@ -49,32 +49,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="graphs">
             <div class="sign-in-form">
                 <div class="sign-in-form-top">
-                    <p><a href="index.html">Hệ thống quản lý Thư Viện Quốc Gia</a></p>
+                    <p>Hệ thống quản lý Thư Viện Quốc Gia</p>
                 </div>
                 <div class="signin">
-                    <div class="signin-rit">
-								<span class="checkbox1">
-									 <label class="checkbox"><input type="checkbox" name="checkbox" checked="">Quên mật khẩu?</label>
-								</span>
-                        <p><a href="#">Click vào đây</a></p>
+                    <div class="log-input">
+                        <div style="text-align: center; margin:auto; width: 450px">
+                            <input class="user tai-khoan" type="text" placeholder="Tài khoản"/>
+                        </div>
                         <div class="clearfix"></div>
                     </div>
-                    <form>
-                        <div class="log-input">
-                            <div class="log-input-left">
-                                <input type="text" class="user" value="Tài khoản" onfocus="this.value = '';"
-                                       onblur="if (this.value == '') {this.value = 'Email address:';}"/>
-                            </div>
+                    <div class="log-input">
+                        <div style="text-align: center; margin:auto; width: 450px">
+                            <input class="lock mat-khau" type="password" placeholder="Mật khẩu"/>
                         </div>
-                        <div class="log-input">
-                            <div class="log-input-left">
-                                <input type="password" class="lock" value="Mật khẩu" onfocus="this.value = '';"
-                                       onblur="if (this.value == '') {this.value = 'Email address:';}"/>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <input type="submit" value="Đăng nhập">
-                    </form>
+                        <div class="clearfix"></div>
+                    </div>
+                    <br/>
+                    <input id="btn-submit" type="submit" style="text-align: center; margin:auto; width: 450px" value="Đăng nhập">
                 </div>
             </div>
         </div>
@@ -88,5 +79,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#btn-submit").on("click",function (){
+            if($('.tai-khoan').val().trim() === '' || $('.mat-khau').val().trim() === '') {
+                if ($('.tai-khoan').val().trim() === '') {
+                    $(".tai-khoan").notify(
+                        "Không được để trống thông tin",
+                        {position: "right"}
+                    );
+                }
+
+                if ($('.mat-khau').val().trim() === '') {
+                    $(".mat-khau").notify(
+                        "Không được để trống thông tin",
+                        {position: "right"}
+                    );
+                }
+                return;
+            }
+
+            var myJSON = {
+                taiKhoan: $('.tai-khoan').val().trim(),
+                matkhau: $('.mat-khau').val().trim()
+            }
+            $.ajax({
+                url: 'http://localhost:8081/api/dang-nhap',
+                type: 'POST',
+                data: myJSON,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                error: function (data) {
+                    alert(" Lỗi " + data.responseJSON.message)
+                },
+                success: function (data) {
+                    alert(" Lỗi " + data)
+                    // window.location.replace("/phieu-muon?id="+data.maPhieuMuon);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
