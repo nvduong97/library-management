@@ -22,4 +22,6 @@ public class NhanVien {
     private String ten;
     private String diaChi;
     private String soDienThoai;
+    @Column(name = "role", nullable = false, columnDefinition = "varchar(255) default 'USER'")
+    private String role;
 }
