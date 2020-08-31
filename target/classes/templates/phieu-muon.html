@@ -132,7 +132,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <table class="table">
                             <thead>
                             <tr class="danger">
-                                <th>STT</th>
                                 <th>Mã</th>
                                 <th>Tên Sách</th>
                                 <th>Tác Giả</th>
@@ -143,7 +142,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </thead>
                             <tbody>
                             <tr class="warning" th:each="sachMuon,state : ${phieuMuon.getChiTietMuons()}">
-                                <td scope="row" th:text="${state.count}"></td>
+<!--                                <td scope="row" th:text="${state.count}"></td>-->
                                 <td th:text="${sachMuon.getSach().getMaSach()}" style="text-align: left"></td>
                                 <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
                                     style="text-align: left"></td>
