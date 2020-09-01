@@ -1,6 +1,7 @@
 package com.ptit.cnpm.security;
 
 import com.ptit.cnpm.entity.NhanVien;
+import com.ptit.cnpm.exception.NotFoundException;
 import com.ptit.cnpm.repository.NhanVienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -21,6 +22,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         if (nhanVien != null) {
             return new CustomUserDetails(nhanVien);
         }
-        return null;
+        throw new NotFoundException("Dữ liệu yêu cầu không tồn tại");
     }
 }

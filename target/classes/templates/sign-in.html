@@ -102,7 +102,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     {position: "right"}
                 );
             }
-
             if (matKhau === '') {
                 $(".mat-khau").notify(
                     "Không được để trống thông tin",
@@ -116,9 +115,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             taiKhoan: taiKhoan,
             matKhau: matKhau
         }
+
         axios.post("/api/dang-nhap", req).then(function(res){
-            swal("Thành công");
-            setTimeout(() => location.replace("/"), 100);
+            $.notify("Đăng nhập thành công", "success");
+            setTimeout(() => location.replace("/"), 300);
         }, function(err){
             $(".tai-khoan").notify(
                 "Sai thông tin đăng nhập",

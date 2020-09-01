@@ -61,14 +61,4 @@ public class ChiTietMuon {
     public void setBanDoc(BanDoc banDoc) {
         this.banDoc = banDoc;
     }
-
-//    @JsonIgnore
-//    public Sach getSach() {
-//        return sach;
-//    }
-//
-//    @JsonIgnore
-//    public void setSach(Sach sach) {
-//        this.sach = sach;
-//    }
 }

@@ -1,6 +1,7 @@
 package com.ptit.cnpm.service;
 
 import com.ptit.cnpm.entity.NhanVien;
+import com.ptit.cnpm.exception.DuplicateRecordException;
 import com.ptit.cnpm.model.NhanVienReq;
 import com.ptit.cnpm.repository.NhanVienRepository;
 import org.mindrot.jbcrypt.BCrypt;
@@ -19,8 +20,7 @@ public class NhanVienService {
         List<NhanVien> nhanViens = nhanVienRepository.findAll();
         for (NhanVien nhanVien: nhanViens) {
             if(nhanVien.getTaiKhoan().equals(req.getTaiKhoan())){
-//                throw  new DuplicateRecordException("Email đã tồn tại");
-                return new NhanVien();
+                throw  new DuplicateRecordException("Tài khoản đã tồn tại");
             }
         }
         NhanVien nhanVien = new NhanVien();

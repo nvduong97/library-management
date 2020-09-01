@@ -24,14 +24,16 @@ public class DauSach {
     private int maDauSach;
 
     private String tenDauSach;
+
     private String tacGia;
 
-//    @JsonSerialize(using = CustomDateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd")
     private Date namXuatBan;
 
     private int giaBia;
+
     private int soLuong;
+
     private String moTa;
 
     @OneToMany(mappedBy = "dauSach", fetch = FetchType.LAZY)

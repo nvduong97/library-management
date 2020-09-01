@@ -355,24 +355,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $.notify("Dữ liệu yêu cầu không tồn tại", "error");
                 },
                 success: function (data) {
-                    if (!data) {
-                        $.notify("Dữ liệu yêu cầu không tồn tại", "error");
+                    if (!isBookDup(data.dauSach.maDauSach)) {
+                        insertNewBook(data);
+                        data.dauSach.namXuatBan = data.dauSach.namXuatBan.slice(0, 10);
+                        var ctm = {
+                            maSachMuon: 0,
+                            trangThai: 0,
+                            ngayMuon: startDate,
+                            ngayTra: endDate,
+                            sach: data
+                        };
+                        listData.push(ctm);
+                        $.notify("Sách đã được thêm", "success");
                     } else {
-                        if (!isBookDup(data.dauSach.maDauSach)) {
-                            insertNewBook(data);
-                            data.dauSach.namXuatBan = data.dauSach.namXuatBan.slice(0, 10);
-                            var ctm = {
-                                maSachMuon: 0,
-                                trangThai: 0,
-                                ngayMuon: startDate,
-                                ngayTra: endDate,
-                                sach: data
-                            };
-                            listData.push(ctm);
-                            $.notify("Sách đã được thêm", "success");
-                        } else {
-                            $.notify("Sách này đang được mượn", "warn");
-                        }
+                        $.notify("Sách này đang được mượn", "warn");
                     }
                 }
             });
@@ -398,14 +394,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     );
                 },
                 success: function (data) {
-                    if (!data) {
-                        $(".btn-tim-bd").notify(
-                            "Dữ liệu yêu cầu không tồn tại",
-                            {position: "right"}
-                        );
-                    } else {
-                        window.location.replace("/muon-sach?ban-doc=" + bandoc);
-                    }
+                    window.location.replace("/muon-sach?ban-doc=" + bandoc);
                 }
             });
         });
@@ -459,7 +448,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         alert(" Lỗi " + data.responseJSON.message)
                     },
                     success: function (data) {
-                        window.location.replace("/phieu-muon?id="+data.maPhieuMuon);
+                        window.location.replace("/phieu-muon?id=" + data.maPhieuMuon);
                     }
                 });
             }

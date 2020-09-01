@@ -19,6 +19,7 @@ public class Sach {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int maSach;
+
     private int maVach;
 
     @ManyToOne()

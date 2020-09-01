@@ -21,16 +21,18 @@ public class BanDoc {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int maBanDoc;
+
     private int maVach;
+
     private String hoTen;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern= "yyyy-MM-dd")
     private Date ngaySinh;
 
     private String diaChi;
+
     private String soDienThoai;
 
-//    @JsonIgnoreProperties(value = {"banDoc"}, allowSetters = true)
     @OneToMany(mappedBy = "banDoc", fetch = FetchType.LAZY)
     private List<ChiTietMuon> chiTietMuons;
 

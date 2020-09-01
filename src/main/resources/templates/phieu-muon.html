@@ -126,42 +126,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                         <br/>
-                        <div class="col-sm-6">
-                            <h4 class="blank1">Danh sách sách còn mượn</h4>
-                        </div>
-                        <table class="table">
-                            <thead>
-                            <tr class="danger">
-                                <th>Mã</th>
-                                <th>Tên Sách</th>
-                                <th>Tác Giả</th>
-                                <th>Mã Vạch</th>
-                                <th>Ngày Mượn</th>
-                                <th>Ngày Phải Trả</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="warning" th:each="sachMuon,state : ${phieuMuon.getChiTietMuons()}">
-<!--                                <td scope="row" th:text="${state.count}"></td>-->
-                                <td th:text="${sachMuon.getSach().getMaSach()}" style="text-align: left"></td>
-                                <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
-                                    style="text-align: left"></td>
-                                <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
-                                    style="text-align: left"></td>
-                                <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
-                                <td th:text="${#dates.format(sachMuon.getNgayMuon(), 'dd-MM-yyyy')}"
-                                    style="text-align: left"></td>
-                                <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
-                                    style="text-align: left"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div style="text-align:center;margin:auto;">
-                            <h4 class="blank1" th:text="${'Tổng số sách đang mượn: ' + phieuMuon.getChiTietMuons().size()}"></h4>
+                        <div class="panel-body no-padding">
+                            <div class="col-sm-6">
+                                <h4 class="blank1">Danh sách sách còn mượn</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr class="danger">
+                                    <th>Mã</th>
+                                    <th>Tên Sách</th>
+                                    <th>Tác Giả</th>
+                                    <th>Mã Vạch</th>
+                                    <th>Ngày Mượn</th>
+                                    <th>Ngày Phải Trả</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="warning" th:each="sachMuon,state : ${phieuMuon.getChiTietMuons()}">
+                                    <!--                                <td scope="row" th:text="${state.count}"></td>-->
+                                    <td th:text="${sachMuon.getSach().getMaSach()}" style="text-align: left"></td>
+                                    <td th:text="${sachMuon.getSach().getDauSach().getTenDauSach()}"
+                                        style="text-align: left"></td>
+                                    <td th:text="${sachMuon.getSach().getDauSach().getTacGia()}"
+                                        style="text-align: left"></td>
+                                    <td th:text="${sachMuon.getSach().getMaVach()}" style="text-align: left"></td>
+                                    <td th:text="${#dates.format(sachMuon.getNgayMuon(), 'dd-MM-yyyy')}"
+                                        style="text-align: left"></td>
+                                    <td th:text="${#dates.format(sachMuon.getNgayTra(), 'dd-MM-yyyy')}"
+                                        style="text-align: left"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div style="text-align:center;margin:auto;">
+                                <h4 class="blank1"
+                                    th:text="${'Tổng số sách đang mượn: ' + phieuMuon.getChiTietMuons().size()}"></h4>
+                            </div>
                         </div>
                         <br/>
                         <div style="text-align:center;margin:auto;">
-                            <button type="button" class="btn label-warning btn-in-phieu-muon" style="margin-bottom: 20px">In phiếu mượn
+                            <button type="button" class="btn label-warning btn-in-phieu-muon"
+                                    style="margin-bottom: 20px">In phiếu mượn
                             </button>
                         </div>
                     </div>
@@ -186,7 +190,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $(document).ready(function () {
         $(".btn-in-phieu-muon").on("click", function () {
             swal({
-                title: 'In phiếu mượn thành công' + '<br />'+ 'quay về trang chủ',
+                title: 'In phiếu mượn thành công' + '<br />' + 'quay về trang chủ',
                 showCancelButton: true
             }).then(function (result) {
                 if (result.value) {

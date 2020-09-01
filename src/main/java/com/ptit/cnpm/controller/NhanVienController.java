@@ -50,9 +50,7 @@ public class NhanVienController {
     @PostMapping("/api/dang-nhap")
     public ResponseEntity<Object> login(@RequestBody NhanVienReq req,
                                    HttpServletResponse response) {
-        String s;
         try {
-            // Xác thực từ username và password.
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             req.getTaiKhoan(),
@@ -60,23 +58,17 @@ public class NhanVienController {
                     )
             );
 
-            // Nếu không xảy ra exception tức là thông tin hợp lệ
-            // Set thông tin authentication vào Security Context
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            // Gen token
             String token = jwtTokenUtil.generateToken((UserDetails) authentication.getPrincipal());
 
             Cookie jwtToken = new Cookie("jwt_token", token);
             jwtToken.setMaxAge(60 * 60 * 24);
             jwtToken.setPath("/");
             response.addCookie(jwtToken);
-            s = "OK";
+            return ResponseEntity.ok(jwtToken);
         }catch (Exception e){
-            s = "FAIL";
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(s);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
-        return ResponseEntity.ok(s);
     }
 
 }

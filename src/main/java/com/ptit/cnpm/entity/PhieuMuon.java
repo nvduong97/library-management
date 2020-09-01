@@ -19,6 +19,7 @@ public class PhieuMuon {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int maPhieuMuon;
+
     private int maVach;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -27,14 +28,4 @@ public class PhieuMuon {
 
     @OneToMany(mappedBy = "phieuMuon")
     private List<ChiTietMuon> chiTietMuons;
-
-//    @JsonIgnore
-//    public List<ChiTietMuon> getChiTietMuons() {
-//        return chiTietMuons;
-//    }
-//
-//    @JsonIgnore
-//    public void setChiTietMuons(List<ChiTietMuon> chiTietMuons) {
-//        this.chiTietMuons = chiTietMuons;
-//    }
 }
