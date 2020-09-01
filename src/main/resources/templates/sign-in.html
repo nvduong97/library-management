@@ -2,35 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Đăng nhập</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Easy Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
-    <script type="application/x-javascript"> addEventListener("load", function () {
-        setTimeout(hideURLbar, 0);
-    }, false);
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    } </script>
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel='stylesheet' type='text/css' href="css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel='stylesheet' type='text/css' href="css/style.css">
     <!-- Graph CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}"/>
+    <link rel="stylesheet" href="css/font-awesome.css">
     <!-- jQuery -->
     <!-- lined-icons -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/icon-font.min.css}"/>
+    <link rel="stylesheet" type='text/css' href="css/icon-font.min.css">
     <!-- //lined-icons -->
     <!-- chart -->
     <script src="js/Chart.js"></script>
     <!-- //chart -->
     <!--animate-->
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/animate.css}"/>
-    <script type="text/javascript" th:src="@{/js/wow.min.js}"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="css/animate.css">
+    <script src="js/wow.min.js"></script>
     <script>
         new WOW().init();
+
     </script>
     <!--//end-animate-->
     <!----webfonts--->
@@ -38,7 +42,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           rel='stylesheet' type='text/css'>
     <!---//webfonts--->
     <!-- Meters graphs -->
-    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
     <!-- Placed js at the end of the document so the pages load faster -->
 
 </head>
@@ -71,57 +75,63 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
-    <!--footer section start-->
     <footer><p>Copyright &copy; 2020. All rights reserved. Nguyễn Văn Dương</p></footer>
-    <!--footer section end-->
 </section>
 
-<script type="text/javascript" th:src="@{/js/jquery.nicescroll.js}"></script>
-<script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
-<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#btn-submit").on("click", function () {
-            if ($('.tai-khoan').val().trim() === '' || $('.mat-khau').val().trim() === '') {
-                if ($('.tai-khoan').val().trim() === '') {
-                    $(".tai-khoan").notify(
-                        "Không được để trống thông tin",
-                        {position: "right"}
-                    );
-                }
-
-                if ($('.mat-khau').val().trim() === '') {
-                    $(".mat-khau").notify(
-                        "Không được để trống thông tin",
-                        {position: "right"}
-                    );
-                }
-                return;
-            }
-
-            var myJSON = {
-                taiKhoan: $('.tai-khoan').val().trim(),
-                matkhau: $('.mat-khau').val().trim()
-            }
-            $.ajax({
-                url: 'http://localhost:8081/api/dang-nhap',
-                type: 'POST',
-                data: myJSON,
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                error: function (data) {
-                    alert(" Lỗi " + data.responseJSON.message)
-                },
-                success: function (data) {
-                    alert(" Lỗi " + data)
-                    // window.location.replace("/phieu-muon?id="+data.maPhieuMuon);
-                }
-            });
-        });
+        console.log("HELLO")
     });
+
+    $("#btn-submit").on("click", function () {
+        console.log("HELLO 2")
+        var taiKhoan = $('.tai-khoan').val().trim();
+        var matKhau = $('.mat-khau').val().trim();
+
+        if (taiKhoan === '' || matKhau === '') {
+            if (taiKhoan === '') {
+                $(".tai-khoan").notify(
+                    "Không được để trống thông tin",
+                    {position: "right"}
+                );
+            }
+
+            if (matKhau === '') {
+                $(".mat-khau").notify(
+                    "Không được để trống thông tin",
+                    {position: "right"}
+                );
+            }
+            return;
+        }
+
+        var req = {
+            taiKhoan: taiKhoan,
+            matKhau: matKhau
+        }
+
+        axios.post("/api/dang-nhap", req).then(function(res){
+            swal("Thành công");
+            setTimeout(() => location.replace("/"), 100);
+        }, function(err){
+            $(".tai-khoan").notify(
+                "Sai thông tin đăng nhập",
+                {position: "right"}
+            );
+            $(".mat-khau").notify(
+                "Sai thông tin đăng nhập",
+                {position: "right"}
+            );
+        })
+    });
+
 </script>
 </body>
 </html>
