@@ -456,8 +456,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
 
     function deleteBook(id) {
-        $(".list-book tr[data-id='" + id + "']").remove();
+        var removeIndex = listData.map(function (item) {return item.sach.maSach;}).indexOf(id);
+        listData.splice(removeIndex, 1);
         set.delete(id);
+        $(".list-book tr[data-id='" + id + "']").remove();
         if (set.size <= sachMuons.length) {
             document.getElementById("btn-xac-nhan").disabled = true;
         }
