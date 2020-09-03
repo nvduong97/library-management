@@ -16,13 +16,11 @@ public class JwtTokenUtil {
     public static final String PREFIX = "Bearer ";
 
     // Token có hạn trong vòng 24 giờ kể từ thời điểm tạo, thời gian tính theo giây
-    @Value("${jwt.duration}")
-    public Integer duration;
+    public static Integer duration = 86400;
 
     // Lấy giá trị key được cấu hình trong file appliacation.properties
     // Key này sẽ được sử dụng để mã hóa và giải mã
-    @Value("${jwt.secret}")
-    private String secret;
+    private static String secret = "supersecret";
 
     // Sinh token
     public String generateToken(UserDetails userDetails) {
