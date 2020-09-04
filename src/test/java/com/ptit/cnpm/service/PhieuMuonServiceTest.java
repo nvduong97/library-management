@@ -71,7 +71,7 @@ public class PhieuMuonServiceTest {
             PhieuMuon phieuMuon = new PhieuMuon();
             phieuMuonService.save(phieuMuon);
         }catch (Exception e){
-            assertEquals(null, e.getMessage());
+            assertEquals("Dữ liệu không hợp lệ", e.getMessage());
         }
     }
 }

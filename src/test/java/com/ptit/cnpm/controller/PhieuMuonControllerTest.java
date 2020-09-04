@@ -98,7 +98,7 @@ public class PhieuMuonControllerTest {
         PhieuMuon phieuMuon = new PhieuMuon();
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/api/luu/phieu-muon").contentType(MediaType.APPLICATION_JSON).content(asJsonString(phieuMuon)))
-                .andExpect(MockMvcResultMatchers.status().isInternalServerError());
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     public static String asJsonString(final Object obj) {
