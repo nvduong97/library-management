@@ -1,5 +1,6 @@
 package com.ptit.cnpm.controller;
 
+import com.ptit.cnpm.model.ErrorResponse;
 import com.ptit.cnpm.model.NhanVienReq;
 import com.ptit.cnpm.security.JwtTokenUtil;
 import com.ptit.cnpm.service.NhanVienService;
@@ -35,8 +36,6 @@ public class NhanVienController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    private final String NAME_TOKEN = "JWT_TOKEN";
-
     @GetMapping("/dang-nhap")
     public String signIn() {
         return "sign-in";
@@ -65,9 +64,10 @@ public class NhanVienController {
             jwtToken.setMaxAge(60 * 60 * 24);
             jwtToken.setPath("/");
             response.addCookie(jwtToken);
-            return ResponseEntity.ok(jwtToken);
+            return ResponseEntity.ok(token);
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            ErrorResponse result = new ErrorResponse(HttpStatus.UNAUTHORIZED, "Sai thông tin đăng nhập");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
         }
     }
 

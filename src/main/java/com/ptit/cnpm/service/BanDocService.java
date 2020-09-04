@@ -31,8 +31,8 @@ public class BanDocService {
         List<ChiTietMuon> sachDangMuons = chiTietMuonRepository.findByIdAndBanDoc(0, id).orElse(new ArrayList<>());
         return BanDocDTO.builder()
                 .banDoc(banDoc.get())
-                .sanhDaMuons(sachDaMuons)
-                .sanhDangMuons(sachDangMuons)
+                .sachDaMuons(sachDaMuons)
+                .sachDangMuons(sachDangMuons)
                 .build();
     }
 

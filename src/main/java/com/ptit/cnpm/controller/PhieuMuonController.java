@@ -22,12 +22,13 @@ public class PhieuMuonController {
         Optional<PhieuMuon> phieuMuon = phieuMuonService.findById(id);
         if(phieuMuon.isPresent()){
             model.addAttribute("phieuMuon", phieuMuon.get());
+            return "phieu-muon";
         }
-        return "phieu-muon";
+        return "blank_page";
     }
 
     @PostMapping("/api/luu/phieu-muon")
-    public ResponseEntity<?> save(@RequestBody PhieuMuon phieuMuon) {
+    public ResponseEntity<?> luuPhieuMuon(@RequestBody PhieuMuon phieuMuon) {
         return ResponseEntity.ok(phieuMuonService.save(phieuMuon));
     }
 }

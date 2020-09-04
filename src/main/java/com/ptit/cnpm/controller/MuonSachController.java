@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("")
 @Controller
 public class MuonSachController {
+
     @Autowired
     BanDocService banDocService;
 
@@ -25,8 +26,8 @@ public class MuonSachController {
     public String getBanDoc(Model model, @RequestParam(defaultValue = "0", name = "ban-doc", required = false) Integer id) {
         BanDocDTO result = banDocService.getBanDoc(id);
         model.addAttribute("banDoc", result.getBanDoc());
-        model.addAttribute("sachMuons", result.getSanhDangMuons());
-        model.addAttribute("sachDaMuons", result.getSanhDaMuons());
+        model.addAttribute("sachMuons", result.getSachDangMuons());
+        model.addAttribute("sachDaMuons", result.getSachDaMuons());
         return "muon-sach";
     }
 }

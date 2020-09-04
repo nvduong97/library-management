@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("")
 @Controller
 public class SachController {
+
     @Autowired
     SachService sachService;
 

@@ -13,6 +13,6 @@ import java.util.List;
 @Builder
 public class BanDocDTO {
     private BanDoc banDoc;
-    private List<ChiTietMuon> sanhDangMuons;
-    private List<ChiTietMuon> sanhDaMuons;
+    private List<ChiTietMuon> sachDangMuons;
+    private List<ChiTietMuon> sachDaMuons;
 }
