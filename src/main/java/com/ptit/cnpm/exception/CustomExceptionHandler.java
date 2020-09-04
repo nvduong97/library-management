@@ -21,6 +21,12 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<?> handlerBadRequestException(BadRequestException ex, WebRequest req) {
+        ErrorResponse err = new ErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+    }
+
     // Xử lý tất cả các exception chưa được khai báo
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handlerException(Exception ex, WebRequest req) {

@@ -11,8 +11,8 @@ import java.util.Optional;
 @Repository
 public interface ChiTietMuonRepository extends JpaRepository<ChiTietMuon, Integer> {
 
-    @Query(
-            value = "SELECT * FROM chi_tiet_muon c WHERE c.trang_thai = ?1 AND c.ma_ban_doc = ?2",
+    @Query(value =
+            "SELECT * FROM chi_tiet_muon c WHERE c.trang_thai = ?1 AND c.ma_ban_doc = ?2",
             nativeQuery = true)
     Optional<List<ChiTietMuon>> findByIdAndBanDoc(int trangThai, int maBD);
 
