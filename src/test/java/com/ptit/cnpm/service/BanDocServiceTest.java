@@ -23,7 +23,7 @@ public class BanDocServiceTest {
     public void getBanDocPass() {
         BanDocDTO banDocDTO = banDocService.getBanDoc(1);
         assertNotNull(banDocDTO);
-        assertEquals("Duong", banDocDTO.getBanDoc().getHoTen());
+        assertEquals("Nguyễn Văn Dương", banDocDTO.getBanDoc().getHoTen());
 //        assertEquals(2, banDocDTO.getSachDaMuons().size());
 //        assertEquals(2, banDocDTO.getSachDangMuons().size());
     }
@@ -40,7 +40,7 @@ public class BanDocServiceTest {
     public void getBanDocByIdPass() {
         BanDoc banDoc = banDocService.getBanDocById(1);
         assertNotNull(banDoc);
-        assertEquals("Duong", banDoc.getHoTen());
+        assertEquals("Nguyễn Văn Dương", banDoc.getHoTen());
     }
 
     @Test

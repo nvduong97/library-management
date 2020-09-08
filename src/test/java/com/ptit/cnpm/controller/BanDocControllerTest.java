@@ -58,7 +58,7 @@ public class BanDocControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.maBanDoc", Matchers.is(1)))
-                .andExpect(jsonPath("$.hoTen", Matchers.is("Duong")));
+                .andExpect(jsonPath("$.hoTen", Matchers.is("Nguyễn Văn Dương")));
     }
 
     @Test

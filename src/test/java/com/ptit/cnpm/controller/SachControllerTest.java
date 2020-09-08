@@ -55,7 +55,7 @@ public class SachControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.maSach", Matchers.is(1)))
-                .andExpect(jsonPath("$.maVach", Matchers.is(134434)));
+                .andExpect(jsonPath("$.maVach", Matchers.is(123443)));
     }
 
     @Test

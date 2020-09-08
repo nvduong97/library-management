@@ -21,7 +21,7 @@ public class SachServiceTest {
     public void getSachByIdPass() {
         Sach sach = sachService.getSachById(1);
         assertNotNull(sach);
-        assertEquals(134434, sach.getMaVach());
+        assertEquals(123443, sach.getMaVach());
         assertEquals(1, sach.getMaSach());
     }
 

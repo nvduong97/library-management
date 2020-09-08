@@ -27,8 +27,8 @@ public class BanDocService {
         if (!banDoc.isPresent()) {
             return new BanDocDTO();
         }
-        List<ChiTietMuon> sachDaMuons = chiTietMuonRepository.findByIdAndBanDoc(1, id).orElse(new ArrayList<>());
-        List<ChiTietMuon> sachDangMuons = chiTietMuonRepository.findByIdAndBanDoc(0, id).orElse(new ArrayList<>());
+        List<ChiTietMuon> sachDaMuons = chiTietMuonRepository.findByTrangThaiAndBanDoc(1, id).orElse(new ArrayList<>());
+        List<ChiTietMuon> sachDangMuons = chiTietMuonRepository.findByTrangThaiAndBanDoc(0, id).orElse(new ArrayList<>());
         return BanDocDTO.builder()
                 .banDoc(banDoc.get())
                 .sachDaMuons(sachDaMuons)

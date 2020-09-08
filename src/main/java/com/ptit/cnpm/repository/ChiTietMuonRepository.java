@@ -14,6 +14,6 @@ public interface ChiTietMuonRepository extends JpaRepository<ChiTietMuon, Intege
     @Query(value =
             "SELECT * FROM chi_tiet_muon c WHERE c.trang_thai = ?1 AND c.ma_ban_doc = ?2",
             nativeQuery = true)
-    Optional<List<ChiTietMuon>> findByIdAndBanDoc(int trangThai, int maBD);
+    Optional<List<ChiTietMuon>> findByTrangThaiAndBanDoc(int trangThai, int maBD);
 
 }
