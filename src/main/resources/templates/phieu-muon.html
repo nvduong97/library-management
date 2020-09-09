@@ -118,6 +118,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <h4 class="blank1">Mã vạch phiếu mượn:</h4>
                                 </div>
                                 <div class="col-sm-9">
+                                    <script th:inline="javascript">
+                                        var maBD = [[${phieuMuon.getBanDoc().getMaBanDoc()}]];
+                                    </script>
                                     <h4 class="blank1" th:text="${phieuMuon.getBanDoc().getMaBanDoc()}"></h4>
                                     <h4 class="blank1" th:text="${phieuMuon.getBanDoc().getHoTen()}"></h4>
                                     <h4 class="blank1" th:text="${phieuMuon.getBanDoc().getMaVach()}"></h4>
@@ -187,17 +190,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".btn-in-phieu-muon").on("click", function () {
-            swal({
-                title: 'In phiếu mượn thành công' + '<br />' + 'quay về trang chủ',
-                showCancelButton: true
-            }).then(function (result) {
-                if (result.value) {
-                    window.location.replace("/");
-                }
-            })
-        });
+    $(".btn-in-phieu-muon").on("click", function () {
+        // swal(
+        //     'In phiếu mượn thành công!',
+        //     false,
+        //     'success'
+        // )
+        $.notify("In phiếu mượn thành công", "success");
+        setTimeout(function () {
+            window.location.href = "/muon-sach?ban-doc="+maBD;
+        }, 1500);
     });
 </script>
 </body>
