@@ -355,7 +355,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $.notify("Dữ liệu yêu cầu không tồn tại", "error");
                 },
                 success: function (data) {
-                    if (!isBookDup(data.dauSach.maDauSach)) {
+                    if(data.dauSach.soLuong <= 0 ){
+                        $.notify("Sách đã hết, xin chọn sách khác", "warn");
+                    }else if( isBookDup(data.dauSach.maDauSach)){
+                        $.notify("Sách này đang được mượn", "warn");
+                    }else {
                         insertNewBook(data);
                         data.dauSach.namXuatBan = data.dauSach.namXuatBan.slice(0, 10);
                         var ctm = {
@@ -367,8 +371,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         };
                         listData.push(ctm);
                         $.notify("Sách đã được thêm", "success");
-                    } else {
-                        $.notify("Sách này đang được mượn", "warn");
                     }
                 }
             });

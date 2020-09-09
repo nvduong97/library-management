@@ -66,7 +66,7 @@ public class NhanVienController {
             response.addCookie(jwtToken);
             return ResponseEntity.ok(token);
         }catch (Exception e){
-            ErrorResponse result = new ErrorResponse(HttpStatus.UNAUTHORIZED, "Sai thông tin đăng nhập");
+            ErrorResponse result = new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), "Sai thông tin đăng nhập", null);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
         }
     }

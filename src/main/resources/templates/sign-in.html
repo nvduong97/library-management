@@ -111,15 +111,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             return;
         }
 
+        if(taiKhoan.length < 4 || matKhau.length > 20 || matKhau.length < 4 || matKhau.length > 20) {
+            if (taiKhoan.length < 4 || matKhau.length > 20) {
+                $(".tai-khoan").notify(
+                    "Số lượng kí tự phải từ 4 đến 20!",
+                    {position: "right"}
+                );
+            }
+            if (matKhau.length < 4 || matKhau.length > 20) {
+                $(".mat-khau").notify(
+                    "Số lượng kí tự phải từ 4 đến 20!",
+                    {position: "right"}
+                );
+            }
+            return;
+        }
+
         var req = {
             taiKhoan: taiKhoan,
             matKhau: matKhau
         }
 
-        axios.post("/api/dang-nhap", req).then(function(res){
+        axios.post("/api/dang-nhap", req).then(function (res) {
             $.notify("Đăng nhập thành công", "success");
             setTimeout(() => location.replace("/"), 300);
-        }, function(err){
+        }, function (err) {
             $(".tai-khoan").notify(
                 "Sai thông tin đăng nhập",
                 {position: "right"}
