@@ -33,27 +33,31 @@ public class PhieuMuonService {
         if (phieuMuonReq.getBanDoc() == null || phieuMuonReq.getChiTietMuons() == null) {
             throw new BadRequestException("Dữ liệu không hợp lệ");
         }
-        Integer maVach = phieuMuonRepository.getMaVachMax();
-        phieuMuonReq.setMaVach((maVach == null) ? 10000 : ++maVach);
-        PhieuMuon phieuMuon = phieuMuonRepository.save(phieuMuonReq);
+        try {
+            Integer maVach = phieuMuonRepository.getMaVachMax();
+            phieuMuonReq.setMaVach((maVach == null) ? 10000 : ++maVach);
+            PhieuMuon phieuMuon = phieuMuonRepository.save(phieuMuonReq);
 
-        Date ngayMuon = new Date();
-        Calendar ngayTra = Calendar.getInstance();
-        ngayTra.add(Calendar.DATE, 30);
+            Date ngayMuon = new Date();
+            Calendar ngayTra = Calendar.getInstance();
+            ngayTra.add(Calendar.DATE, 30);
 
-        phieuMuonReq.getChiTietMuons().forEach(chiTietMuon -> {
-            chiTietMuon.setTrangThai(0);
-            chiTietMuon.setNgayMuon(ngayMuon);
-            chiTietMuon.setNgayTra(ngayTra.getTime());
-            chiTietMuon.setBanDoc(phieuMuonReq.getBanDoc());
-            chiTietMuon.setPhieuMuon(phieuMuon);
+            phieuMuonReq.getChiTietMuons().forEach(chiTietMuon -> {
+                chiTietMuon.setTrangThai(0);
+                chiTietMuon.setNgayMuon(ngayMuon);
+                chiTietMuon.setNgayTra(ngayTra.getTime());
+                chiTietMuon.setBanDoc(phieuMuonReq.getBanDoc());
+                chiTietMuon.setPhieuMuon(phieuMuon);
 
-            DauSach dauSach = chiTietMuon.getSach().getDauSach();
-            dauSach.setSoLuong((dauSach.getSoLuong() <= 0) ? 0 : dauSach.getSoLuong() - 1);
+                DauSach dauSach = chiTietMuon.getSach().getDauSach();
+                dauSach.setSoLuong((dauSach.getSoLuong() <= 0) ? 0 : dauSach.getSoLuong() - 1);
 
-            chiTietMuonRepository.save(chiTietMuon);
-            dauSachRepository.save(dauSach);
-        });
-        return phieuMuon;
+                chiTietMuonRepository.save(chiTietMuon);
+                dauSachRepository.save(dauSach);
+            });
+            return phieuMuon;
+        }catch (Exception e){
+            throw new BadRequestException("Đã xảy ra lỗi");
+        }
     }
 }
