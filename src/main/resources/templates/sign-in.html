@@ -134,7 +134,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         axios.post("/api/dang-nhap", req).then(function (res) {
             $.notify("Đăng nhập thành công", "success");
-            setTimeout(() => location.replace("/"), 300);
+            setTimeout(() => location.replace("/"), 1500);
         }, function (err) {
             $(".tai-khoan").notify(
                 "Sai thông tin đăng nhập",
