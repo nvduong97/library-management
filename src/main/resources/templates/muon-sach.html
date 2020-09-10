@@ -348,6 +348,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 return;
             }
 
+            if (maSach > 20) {
+                $("#ma-sach").notify(
+                    "Không được quá 20 kí tự",
+                    {position: "right"}
+                );
+                return;
+            }
+
             $.ajax({
                 url: '/api/sach/' + maSach,
                 type: 'GET',
@@ -382,6 +390,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             if (bandoc === '') {
                 $(".btn-tim-bd").notify(
                     "Không được để trống thông tin",
+                    {position: "right"}
+                );
+                return;
+            }
+            if (bandoc.length > 20) {
+                $(".btn-tim-bd").notify(
+                    "Không được quá 20 kí tự",
                     {position: "right"}
                 );
                 return;
