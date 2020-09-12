@@ -1,9 +1,6 @@
 package com.ptit.cnpm.service;
 
-import com.ptit.cnpm.entity.BanDoc;
-import com.ptit.cnpm.entity.ChiTietMuon;
-import com.ptit.cnpm.entity.PhieuMuon;
-import com.ptit.cnpm.entity.Sach;
+import com.ptit.cnpm.entity.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -46,15 +41,18 @@ public class PhieuMuonServiceTest {
         PhieuMuon phieuMuon = new PhieuMuon();
         BanDoc banDoc = new BanDoc();
         Sach sach = new Sach();
+        DauSach dauSach = new DauSach();
         ChiTietMuon chiTietMuon = new ChiTietMuon();
         List<ChiTietMuon> chiTietMuons = new ArrayList<>();
 
+        dauSach.setMaDauSach(1);
+        dauSach.setSoLuong(1);
         sach.setMaSach(1);
+        sach.setDauSach(dauSach);
         banDoc.setMaBanDoc(1);
 
-        chiTietMuon.setNgayMuon(new Date());
-        chiTietMuon.setNgayTra(new Date());
         chiTietMuon.setSach(sach);
+        chiTietMuon.setBanDoc(banDoc);
         chiTietMuons.add(chiTietMuon);
 
         phieuMuon.setBanDoc(banDoc);

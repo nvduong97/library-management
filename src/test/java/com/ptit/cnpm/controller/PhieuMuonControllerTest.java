@@ -1,10 +1,7 @@
 package com.ptit.cnpm.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ptit.cnpm.entity.BanDoc;
-import com.ptit.cnpm.entity.ChiTietMuon;
-import com.ptit.cnpm.entity.PhieuMuon;
-import com.ptit.cnpm.entity.Sach;
+import com.ptit.cnpm.entity.*;
 import com.ptit.cnpm.security.JwtTokenUtil;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -26,7 +23,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
@@ -73,15 +69,18 @@ public class PhieuMuonControllerTest {
         PhieuMuon phieuMuon = new PhieuMuon();
         BanDoc banDoc = new BanDoc();
         Sach sach = new Sach();
+        DauSach dauSach = new DauSach();
         ChiTietMuon chiTietMuon = new ChiTietMuon();
         List<ChiTietMuon> chiTietMuons = new ArrayList<>();
 
+        dauSach.setMaDauSach(1);
+        dauSach.setSoLuong(1);
         sach.setMaSach(1);
+        sach.setDauSach(dauSach);
         banDoc.setMaBanDoc(1);
 
-        chiTietMuon.setNgayMuon(new Date());
-        chiTietMuon.setNgayTra(new Date());
         chiTietMuon.setSach(sach);
+        chiTietMuon.setBanDoc(banDoc);
         chiTietMuons.add(chiTietMuon);
 
         phieuMuon.setBanDoc(banDoc);

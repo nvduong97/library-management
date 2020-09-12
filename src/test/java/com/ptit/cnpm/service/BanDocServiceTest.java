@@ -24,8 +24,6 @@ public class BanDocServiceTest {
         BanDocDTO banDocDTO = banDocService.getBanDoc(1);
         assertNotNull(banDocDTO);
         assertEquals("Nguyễn Văn Dương", banDocDTO.getBanDoc().getHoTen());
-//        assertEquals(2, banDocDTO.getSachDaMuons().size());
-//        assertEquals(2, banDocDTO.getSachDangMuons().size());
     }
 
     @Test
