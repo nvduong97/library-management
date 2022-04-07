@@ -1,5 +1,5 @@
 # library-management
-library management using spring boot and thymeleaf
+Hệ thống quản lý thư viện sử dụng spring boot and thymeleaf
 
 # 1. Mô tả
 Website Modul mượn sách cho "Hệ thống quản lý thư viện"
